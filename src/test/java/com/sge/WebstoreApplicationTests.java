@@ -1,4 +1,4 @@
-package com.webstore;
+package com.sge;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

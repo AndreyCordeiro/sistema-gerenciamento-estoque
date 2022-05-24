@@ -1,4 +1,4 @@
-package com.webstore.repository;
+package com.sge.repository;
 
 import lombok.Data;
 
@@ -20,8 +20,8 @@ public class Produto implements Serializable {
     @Column(name = "descricao")
     private String descricao;
 
-    @Column(name = "valor_venda")
-    private Double valorVenda;
+    @Column(name = "preco")
+    private Double preco;
 
     @ManyToOne
     private Fabricante fabricante;

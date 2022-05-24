@@ -1,4 +1,4 @@
-package com.webstore.repository;
+package com.sge.repository;
 
 import lombok.Data;
 
@@ -20,12 +20,15 @@ public class Cliente implements Serializable {
     @Column(name = "cpf")
     private String cpf;
 
+    @Column(name = "telefone")
+    private String telefone;
+
+    @Column(name = "endereco")
+    private String endereco;
+
     @Column(name = "email")
     private String email;
 
     @Column(name = "senha")
     private String senha;
-
-    @Column(name = "observacao")
-    private String observacao;
 }
