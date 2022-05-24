@@ -17,4 +17,10 @@ public class Venda implements Serializable {
 
     @Column(name = "data_venda")
     private Date dataVenda;
+
+    @ManyToOne
+    private Funcionario funcionario;
+
+    @ManyToOne
+    private Cliente cliente;
 }

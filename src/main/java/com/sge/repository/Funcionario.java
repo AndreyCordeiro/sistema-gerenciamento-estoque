@@ -31,7 +31,4 @@ public class Funcionario implements Serializable {
 
     @Column(name = "senha")
     private String senha;
-
-    @ManyToOne
-    private Cargo cargo;
 }

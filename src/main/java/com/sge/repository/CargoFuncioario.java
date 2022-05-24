@@ -17,4 +17,10 @@ public class CargoFuncioario implements Serializable {
 
     @Column(name = "data_inclusao")
     private Date dataInclusao;
+
+    @ManyToOne
+    private Funcionario funcionario;
+
+    @ManyToOne
+    private Cargo cargo;
 }
