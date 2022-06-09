@@ -1,10 +1,9 @@
-package com.sge.repository;
+package com.sge.model;
 
 import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 
 @Entity
 @Table(name = "cargo")

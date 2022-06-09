@@ -1,4 +1,4 @@
-package com.sge.repository;
+package com.sge.model;
 
 import lombok.Data;
 
@@ -6,9 +6,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "funcionario")
+@Table(name = "cliente")
 @Data
-public class Funcionario implements Serializable {
+public class Cliente implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -17,14 +17,14 @@ public class Funcionario implements Serializable {
     @Column(name = "nome")
     private String nome;
 
-    @Column(name = "usuario")
-    private String usuario;
-
     @Column(name = "cpf")
     private String cpf;
 
     @Column(name = "telefone")
     private String telefone;
+
+    @Column(name = "endereco")
+    private String endereco;
 
     @Column(name = "email")
     private String email;
