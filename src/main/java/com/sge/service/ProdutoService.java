@@ -72,4 +72,8 @@ public class ProdutoService {
             produtoRepository.deleteById(id);
         }
     }
+    
+    public Long count() {
+    	return produtoRepository.count();
+    }
 }
