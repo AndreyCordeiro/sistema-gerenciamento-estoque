@@ -2,7 +2,8 @@ package com.sge.controller;
 
 import com.sge.model.Produto;
 import com.sge.service.ProdutoService;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
@@ -16,7 +17,7 @@ import java.awt.print.Pageable;
 @RequestMapping("/api")
 public class ProdutoController {
     //TODO correção
-    //private static final Logger logger = null;
+    public static final Logger logger = LoggerFactory.getLogger(ProdutoController.class);
     @Autowired
     private ProdutoService produtoService;
 
