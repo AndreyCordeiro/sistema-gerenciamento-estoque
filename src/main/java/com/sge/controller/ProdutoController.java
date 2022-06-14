@@ -6,12 +6,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.print.Pageable;
 
 @RestController
 @RequestMapping("/api")
@@ -21,7 +21,7 @@ public class ProdutoController {
     @Autowired
     private ProdutoService produtoService;
 
-    @GetMapping(value = "/produtos", consumes = MediaType.APPLICATION_JSON_VALUE,
+    @GetMapping(value = "/produto", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Page<Produto>> findAll(@RequestBody(required = false) String nome, Pageable pageable) {
         if (StringUtils.isEmpty(nome)) {

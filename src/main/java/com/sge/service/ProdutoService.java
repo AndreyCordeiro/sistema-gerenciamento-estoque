@@ -7,10 +7,9 @@ import com.sge.model.Produto;
 import com.sge.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-
-import java.awt.print.Pageable;
 import java.lang.module.ResolutionException;
 
 @Service
