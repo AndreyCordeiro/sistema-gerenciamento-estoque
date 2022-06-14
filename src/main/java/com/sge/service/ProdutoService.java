@@ -25,7 +25,7 @@ public class ProdutoService {
         Produto produto = produtoRepository.findById(id).orElse(null);
 
         if (produto == null) {
-            throw new ResolutionException("O produto " + id + " não foi enconrtado");
+            throw new ResolutionException("O produto " + id + " não foi encontrado");
         } else {
             return produto;
         }
@@ -42,7 +42,7 @@ public class ProdutoService {
     public Produto saveProduto(Produto produto) throws BadResourceException, ResourceAlreadyExistsException {
         if (!StringUtils.isEmpty(produto.getNome())) {
             if (produto.getId() != null && existsById(produto.getId())) {
-                throw new ResourceAlreadyExistsException("O produto " + produto.getId() + " não foi enconrtado");
+                throw new ResourceAlreadyExistsException("O produto " + produto.getId() + " não foi encontrado");
             }
             return produtoRepository.save(produto);
         } else {
@@ -55,7 +55,7 @@ public class ProdutoService {
     public void updateProduto(Produto produto) throws BadResourceException, ResourceNotFoundException {
         if (!StringUtils.isEmpty(produto.getNome())) {
             if (!existsById(produto.getId())) {
-                throw new ResourceNotFoundException("O produto " + produto.getId() + " não foi enconrtado");
+                throw new ResourceNotFoundException("O produto " + produto.getId() + " não foi encontrado");
             }
             produtoRepository.save(produto);
         } else {
@@ -67,7 +67,7 @@ public class ProdutoService {
 
     public void deleteById(Long id) throws ResourceNotFoundException {
         if (!existsById(id)) {
-            throw new ResourceNotFoundException("O produto " + id + " não foi enconrtado");
+            throw new ResourceNotFoundException("O produto " + id + " não foi encontrado");
         } else {
             produtoRepository.deleteById(id);
         }
