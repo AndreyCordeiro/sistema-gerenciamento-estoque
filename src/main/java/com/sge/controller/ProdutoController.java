@@ -35,4 +35,45 @@ public class ProdutoController {
         Produto produto = produtoService.findById(id);
         return ResponseEntity.ok(produto);
     }
+    
+	@PostMapping(value = "/produto")
+	public ResponseEntity<Produto> addProduto(@RequestBody Produto produto)
+			throws URISyntaxException {
+				
+		try {
+			Produto novoProduto = produtoService.save(produto);
+			return ResponseEntity.created(new URI("/api/produto" + novoProduto.getId())).body(produto);
+		} catch (ResourceAlreadyExistsException ex) {
+			logger.error(ex.getMessage());
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+		}
+	}
+	
+	@PutMapping(value = "/produto/{id}")
+	public ResponseEntity<Produto> updateProduto(@Valid @RequestBody Produto produto, @PathVariable long id) {
+	
+		try {
+			produto.setId(id);
+			produtoService.update(produto);
+			return ResponseEntity.ok().build();
+		} catch (ResourceNotFoundException ex) {
+			logger.error(ex.getMessage());
+			return ResponseEntity.notFound().build();
+		} catch (BadResourceException ex) {
+			logger.error(ex.getMessage());
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+		}
+	}
+	
+	@DeleteMapping(path="/produto/{id}")
+	public ResponseEntity<Void> deleteProdutoById(@PathVariable long id) {
+		try {
+			produtoService.deleteById(id);
+			return ResponseEntity.ok().build();
+		} catch (ResourceNotFoundException ex) {
+			logger.error(ex.getMessage());
+			throw new ResponseStatusException(
+					HttpStatus.NOT_FOUND, ex.getMessage(), ex);
+		}
+	}
 }
