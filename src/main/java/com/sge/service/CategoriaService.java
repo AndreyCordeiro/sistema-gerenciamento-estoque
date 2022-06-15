@@ -36,6 +36,10 @@ public class CategoriaService {
         return categoriaRepository.findAll(pageable);
     }
 
+    public Page<Categoria> findAllByNome(String nome, Pageable pageable) {
+        return categoriaRepository.findByNome(nome, pageable);
+    }
+
     public Categoria saveCategoria(Categoria categoria) throws BadResourceException, ResourceAlreadyExistsException {
         if (!StringUtils.isEmpty(categoria.getNome())) {
             if (categoria.getId() != null && existsById(categoria.getId())) {
