@@ -17,7 +17,7 @@ import java.lang.module.ResolutionException;
 public class ClienteService {
 
     @Autowired
-    private ClienteRepository clienteRepositoryRepository;
+    private ClienteRepository clienteRepository;
 
     private Boolean existsById(Long id) {
         return clienteRepository.existsById(id);
