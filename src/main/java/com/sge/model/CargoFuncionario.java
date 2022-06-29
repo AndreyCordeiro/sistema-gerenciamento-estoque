@@ -9,7 +9,7 @@ import java.util.Date;
 @Entity
 @Table(name = "cargo_funcionario")
 @Data
-public class CargoFuncioario implements Serializable {
+public class CargoFuncionario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
