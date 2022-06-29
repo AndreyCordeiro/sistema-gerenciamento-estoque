@@ -1,5 +1,6 @@
 package com.sge.controller;
 
+import com.sge.dto.ClienteDTO;
 import com.sge.exceptions.BadResourceException;
 import com.sge.exceptions.ResourceAlreadyExistsException;
 import com.sge.exceptions.ResourceNotFoundException;
@@ -31,11 +32,11 @@ public class ClienteController {
 
     @GetMapping(value = "/cliente", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Page<Cliente>> findAll(@RequestBody(required = false) String nome, Pageable pageable) {
+    public ResponseEntity<Page<ClienteDTO>> findAll(@RequestBody(required = false) String nome, Pageable pageable) {
         if (StringUtils.isEmpty(nome)) {
-            return ResponseEntity.ok(clienteService.findAll(pageable));
+            return ResponseEntity.ok(new ClienteDTO().convertCliente(clienteService.findAll(pageable)));
         } else {
-            return ResponseEntity.ok(clienteService.findAllByNome(nome, pageable));
+            return ResponseEntity.ok(new ClienteDTO().convertCliente(clienteService.findAllByNome(nome, pageable)));
         }
     }
 
@@ -46,11 +47,11 @@ public class ClienteController {
     }
 
     @PostMapping(value = "/cliente")
-    public ResponseEntity<Cliente> addCliente(@RequestBody Cliente cliente)
+    public ResponseEntity<ClienteDTO> addCliente(@RequestBody Cliente cliente)
             throws URISyntaxException {
         try {
             Cliente clienteSalvo = clienteService.saveCliente(cliente);
-            return ResponseEntity.created(new URI("/api/cliente" + clienteSalvo.getId())).body(cliente);
+            return ResponseEntity.created(new URI("/api/cliente" + clienteSalvo.getId())).body(new ClienteDTO().convert(cliente));
         } catch (ResourceAlreadyExistsException | BadResourceException e) {
             logger.error(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
