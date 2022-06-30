@@ -1,5 +1,6 @@
 package com.sge.controller;
 
+import com.sge.dto.FuncionarioDTO;
 import com.sge.exceptions.BadResourceException;
 import com.sge.exceptions.ResourceAlreadyExistsException;
 import com.sge.exceptions.ResourceNotFoundException;
@@ -31,11 +32,11 @@ public class FuncionarioController {
 
     @GetMapping(value = "/funcionario", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Page<Funcionario>> findAll(@RequestBody(required = false) String nome, Pageable pageable) {
+    public ResponseEntity<Page<FuncionarioDTO>> findAll(@RequestBody(required = false) String nome, Pageable pageable) {
         if (StringUtils.isEmpty(nome)) {
-            return ResponseEntity.ok(funcionarioService.findAll(pageable));
+            return ResponseEntity.ok(new FuncionarioDTO().convertFuncionario(funcionarioService.findAll(pageable)));
         } else {
-            return ResponseEntity.ok(funcionarioService.findAllByNome(nome, pageable));
+            return ResponseEntity.ok(new FuncionarioDTO().convertFuncionario(funcionarioService.findAllByNome(nome, pageable)));
         }
     }
 
@@ -46,11 +47,11 @@ public class FuncionarioController {
     }
 
     @PostMapping(value = "/funcionario")
-    public ResponseEntity<Funcionario> addFuncionario(@RequestBody Funcionario funcionario)
+    public ResponseEntity<FuncionarioDTO> addFuncionario(@RequestBody Funcionario funcionario)
             throws URISyntaxException {
         try {
             Funcionario funcionarioSalvo = funcionarioService.saveFuncionario(funcionario);
-            return ResponseEntity.created(new URI("/api/funcionario" + funcionarioSalvo.getId())).body(funcionario);
+            return ResponseEntity.created(new URI("/api/funcionario" + funcionarioSalvo.getId())).body(new FuncionarioDTO().convert(funcionario));
         } catch (ResourceAlreadyExistsException | BadResourceException e) {
             logger.error(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
