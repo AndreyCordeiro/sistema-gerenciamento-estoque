@@ -49,7 +49,7 @@ public class CategoriaController {
             throws URISyntaxException {
         try {
             Categoria categoriaSalva = categoriaService.saveCategoria(categoria);
-            return ResponseEntity.created(new URI("/api/produto" + categoriaSalva.getId())).body(categoria);
+            return ResponseEntity.created(new URI("/api/categoria" + categoriaSalva.getId())).body(categoria);
         } catch (ResourceAlreadyExistsException | BadResourceException e) {
             logger.error(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
