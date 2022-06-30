@@ -20,7 +20,6 @@ public class FuncionarioDTO {
     }
 
     public Page<FuncionarioDTO> convertCliente(Page<Funcionario> pageFuncionario) {
-        Page<FuncionarioDTO> funcionarioDTO = pageFuncionario.map(this::convert);
-        return funcionarioDTO;
+        return pageFuncionario.map(this::convert);
     }
 }
