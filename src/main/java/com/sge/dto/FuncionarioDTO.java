@@ -1,6 +1,6 @@
 package com.sge.dto;
 
-import com.sge.model.Funcionario;
+import com.sge.model.entity.Funcionario;
 import lombok.Data;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;

@@ -3,7 +3,7 @@ package com.sge.service;
 import com.sge.exceptions.BadResourceException;
 import com.sge.exceptions.ResourceAlreadyExistsException;
 import com.sge.exceptions.ResourceNotFoundException;
-import com.sge.model.Cliente;
+import com.sge.model.entity.Cliente;
 import com.sge.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

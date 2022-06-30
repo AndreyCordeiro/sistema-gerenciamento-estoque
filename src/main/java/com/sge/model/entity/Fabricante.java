@@ -1,4 +1,4 @@
-package com.sge.model;
+package com.sge.model.entity;
 
 import lombok.Data;
 
@@ -6,14 +6,14 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "cargo")
+@Table(name = "fabricante")
 @Data
-public class Cargo implements Serializable {
+public class Fabricante implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "nome_cargo")
+    @Column(name = "nome")
     private String nome;
 }

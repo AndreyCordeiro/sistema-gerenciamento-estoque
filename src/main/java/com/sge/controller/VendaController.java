@@ -3,7 +3,7 @@ package com.sge.controller;
 import com.sge.exceptions.BadResourceException;
 import com.sge.exceptions.ResourceAlreadyExistsException;
 import com.sge.exceptions.ResourceNotFoundException;
-import com.sge.model.Venda;
+import com.sge.model.entity.Venda;
 import com.sge.service.VendaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

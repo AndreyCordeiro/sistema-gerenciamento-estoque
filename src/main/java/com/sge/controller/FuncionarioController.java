@@ -3,7 +3,7 @@ package com.sge.controller;
 import com.sge.exceptions.BadResourceException;
 import com.sge.exceptions.ResourceAlreadyExistsException;
 import com.sge.exceptions.ResourceNotFoundException;
-import com.sge.model.Funcionario;
+import com.sge.model.entity.Funcionario;
 import com.sge.service.FuncionarioService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,6 +56,7 @@ public class FuncionarioController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
+
     @PutMapping(value = "/funcionario/{id}")
     public ResponseEntity<Funcionario> updateFuncionario(@RequestBody Funcionario funcionario, @PathVariable Long id) {
         try {
@@ -71,6 +72,7 @@ public class FuncionarioController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
+
     @DeleteMapping(path = "/funcionario/{id}")
     public ResponseEntity<Void> deleteFuncionarioById(@PathVariable Long id) {
         try {

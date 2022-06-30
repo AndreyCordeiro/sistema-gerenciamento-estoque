@@ -4,7 +4,7 @@ import com.sge.dto.ClienteDTO;
 import com.sge.exceptions.BadResourceException;
 import com.sge.exceptions.ResourceAlreadyExistsException;
 import com.sge.exceptions.ResourceNotFoundException;
-import com.sge.model.Cliente;
+import com.sge.model.entity.Cliente;
 import com.sge.service.ClienteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

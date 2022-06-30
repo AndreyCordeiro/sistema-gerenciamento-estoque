@@ -3,7 +3,7 @@ package com.sge.controller;
 import com.sge.exceptions.BadResourceException;
 import com.sge.exceptions.ResourceAlreadyExistsException;
 import com.sge.exceptions.ResourceNotFoundException;
-import com.sge.model.Produto;
+import com.sge.model.entity.Produto;
 import com.sge.service.ProdutoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

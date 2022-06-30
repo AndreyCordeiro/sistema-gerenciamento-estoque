@@ -1,6 +1,6 @@
 package com.sge.repository;
 
-import com.sge.model.Produto;
+import com.sge.model.entity.Produto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,4 +1,4 @@
-package com.sge.model;
+package com.sge.model.entity;
 
 import lombok.Data;
 
