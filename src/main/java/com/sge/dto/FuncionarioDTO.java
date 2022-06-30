@@ -19,7 +19,7 @@ public class FuncionarioDTO {
         return funcionarioDTO;
     }
 
-    public Page<FuncionarioDTO> convertCliente(Page<Funcionario> pageFuncionario) {
+    public Page<FuncionarioDTO> convertFuncionario(Page<Funcionario> pageFuncionario) {
         return pageFuncionario.map(this::convert);
     }
 }
