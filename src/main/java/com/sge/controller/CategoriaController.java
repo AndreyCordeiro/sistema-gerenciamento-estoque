@@ -40,8 +40,8 @@ public class CategoriaController {
 
     @GetMapping(value = "/categoria/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Categoria> findCategoriaById(@PathVariable Long id) {
-        Categoria produto = categoriaService.findById(id);
-        return ResponseEntity.ok(produto);
+        Categoria categoria = categoriaService.findById(id);
+        return ResponseEntity.ok(categoria);
     }
 
     @PostMapping(value = "/categoria")
