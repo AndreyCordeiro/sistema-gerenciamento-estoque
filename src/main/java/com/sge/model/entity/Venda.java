@@ -16,7 +16,7 @@ public class Venda implements Serializable {
     private Long id;
 
     @Column(name = "data_venda")
-    private Date dataVenda;
+    private Date dataVenda = new Date();
 
     @ManyToOne
     private Funcionario funcionario;
