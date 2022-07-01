@@ -1,10 +1,8 @@
 package com.sge.controller;
 
 import com.sge.exceptions.ResourceNotFoundException;
-import com.sge.model.model.Endereco;
+import com.sge.model.Endereco;
 import com.sge.service.EnderecoService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

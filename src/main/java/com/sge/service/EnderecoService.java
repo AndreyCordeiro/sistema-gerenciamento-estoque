@@ -1,7 +1,7 @@
 package com.sge.service;
 
 import com.sge.exceptions.ResourceNotFoundException;
-import com.sge.model.model.Endereco;
+import com.sge.model.Endereco;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
