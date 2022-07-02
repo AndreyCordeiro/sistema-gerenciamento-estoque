@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "venda")
@@ -23,4 +24,7 @@ public class Venda implements Serializable {
 
     @ManyToOne
     private Cliente cliente;
+
+    @Transient
+    private List<ItensVenda> itensVenda;
 }
