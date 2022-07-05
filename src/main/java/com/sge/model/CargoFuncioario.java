@@ -1,4 +1,4 @@
-package com.sge.model;
+package com.sge.model.entity;
 
 import lombok.Data;
 
@@ -9,14 +9,14 @@ import java.util.Date;
 @Entity
 @Table(name = "cargo_funcionario")
 @Data
-public class CargoFuncioario implements Serializable {
+public class CargoFuncionario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
     @Column(name = "data_inclusao")
-    private Date dataInclusao;
+    private Date dataInclusao = new Date();
 
     @ManyToOne
     private Funcionario funcionario;
