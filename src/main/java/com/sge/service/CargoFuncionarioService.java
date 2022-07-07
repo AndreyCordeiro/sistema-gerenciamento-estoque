@@ -10,7 +10,7 @@ public class CargoFuncionarioService {
     @Autowired
     private CargoFuncionarioRepository cargoFuncionarioRepository;
 
-    protected CargoFuncionario salvarCargoFuncionario(CargoFuncionario cargoFuncionario) {
+    protected CargoFuncionario saveCargoFuncionario(CargoFuncionario cargoFuncionario) {
         return cargoFuncionarioRepository.save(cargoFuncionario);
     }
 }
