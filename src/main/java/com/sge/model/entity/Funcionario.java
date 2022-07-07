@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "funcionario")
@@ -31,4 +32,7 @@ public class Funcionario implements Serializable {
 
     @Column(name = "senha")
     private String senha;
+
+    @Transient
+    private List<CargoFuncionario> cargoFuncionario;
 }
