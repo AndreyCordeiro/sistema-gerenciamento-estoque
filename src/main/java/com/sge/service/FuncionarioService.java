@@ -1,5 +1,6 @@
 package com.sge.service;
 
+import com.sge.config.AppConfig;
 import com.sge.exceptions.BadResourceException;
 import com.sge.exceptions.ResourceAlreadyExistsException;
 import com.sge.exceptions.ResourceNotFoundException;
@@ -54,6 +55,8 @@ public class FuncionarioService extends CargoFuncionarioService {
 
     public Funcionario saveFuncionario(Funcionario funcionario) throws BadResourceException, ResourceAlreadyExistsException {
         if (funcionario != null) {
+            funcionario.setSenha(AppConfig.passwordEncoder().encode(funcionario.getSenha()));
+
             Funcionario funcionarioSalvo = funcionarioRepository.save(funcionario);
             logger.info("Funcionario " + funcionario.getId() + " salvo com sucesso!");
 
