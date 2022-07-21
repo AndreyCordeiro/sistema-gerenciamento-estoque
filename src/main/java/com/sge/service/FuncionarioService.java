@@ -3,11 +3,10 @@ package com.sge.service;
 import com.sge.exceptions.BadResourceException;
 import com.sge.exceptions.ResourceAlreadyExistsException;
 import com.sge.exceptions.ResourceNotFoundException;
-import com.sge.model.entity.Funcionario;
 import com.sge.model.entity.CargoFuncionario;
+import com.sge.model.entity.Funcionario;
 import com.sge.repository.CargoFuncionarioRepository;
 import com.sge.repository.FuncionarioRepository;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +26,9 @@ public class FuncionarioService extends CargoFuncionarioService {
 
     @Autowired
     private CargoFuncionarioRepository cargoFuncionarioRepository;
+
+    @Autowired
+    private CargoService cargoService;
 
     private Boolean existsById(Long id) {
         return funcionarioRepository.existsById(id);
@@ -56,10 +58,11 @@ public class FuncionarioService extends CargoFuncionarioService {
             logger.info("Funcionario " + funcionario.getId() + " salvo com sucesso!");
 
             for (CargoFuncionario cargo : funcionarioSalvo.getCargoFuncionario()) {
-                cargo.setFuncionario(funcionarioSalvo);
+                cargo.setFuncionario(funcionario);
+                cargo.setCargo(cargoService.findById(cargo.getId()));
                 saveCargoFuncionario(cargo);
             }
-            logger.info("O cargo do funcionario" + funcionario.getId() + " foi salvo com sucesso!");
+            logger.info("O(s) cargo(s) do funcionario " + funcionario.getId() + " foi salvo com sucesso!");
         } else {
             BadResourceException badResourceException = new BadResourceException("Erro ao salvar o cargo!");
             badResourceException.addErrorMessage("O Cargo está vazio ou é nulo");

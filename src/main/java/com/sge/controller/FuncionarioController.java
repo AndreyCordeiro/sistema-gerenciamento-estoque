@@ -41,9 +41,10 @@ public class FuncionarioController {
     }
 
     @GetMapping(value = "/funcionario/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Funcionario> findFuncionarioById(@PathVariable Long id) {
+    public ResponseEntity<FuncionarioDTO> findFuncionarioById(@PathVariable Long id) {
         Funcionario funcionario = funcionarioService.findById(id);
-        return ResponseEntity.ok(funcionario);
+        FuncionarioDTO funcionarioDTO = new FuncionarioDTO().convert(funcionario);
+        return ResponseEntity.ok(funcionarioDTO);
     }
 
     @PostMapping(value = "/funcionario")
