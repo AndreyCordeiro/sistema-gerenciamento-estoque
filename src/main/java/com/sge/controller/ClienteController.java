@@ -41,9 +41,10 @@ public class ClienteController {
     }
 
     @GetMapping(value = "/cliente/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Cliente> findClienteById(@PathVariable Long id) {
+    public ResponseEntity<ClienteDTO> findClienteById(@PathVariable Long id) {
         Cliente cliente = clienteService.findById(id);
-        return ResponseEntity.ok(cliente);
+        ClienteDTO clienteDTO = new ClienteDTO().convert(cliente);
+        return ResponseEntity.ok(clienteDTO);
     }
 
     @PostMapping(value = "/cliente")
