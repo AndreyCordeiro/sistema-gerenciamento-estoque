@@ -1,4 +1,4 @@
-package com.sge.service;
+package com.sge.service.cliente;
 
 import com.sge.config.AppConfig;
 import com.sge.exceptions.BadResourceException;
@@ -17,13 +17,13 @@ import org.springframework.util.StringUtils;
 import java.lang.module.ResolutionException;
 
 @Service
-public class ClienteService {
-    public static final Logger logger = LoggerFactory.getLogger(ClienteService.class);
+public class ClienteServiceImpl implements ClienteService {
+    public static final Logger logger = LoggerFactory.getLogger(ClienteServiceImpl.class);
 
     @Autowired
     private ClienteRepository clienteRepository;
 
-    private Boolean existsById(Long id) {
+    public Boolean existsById(Long id) {
         return clienteRepository.existsById(id);
     }
 

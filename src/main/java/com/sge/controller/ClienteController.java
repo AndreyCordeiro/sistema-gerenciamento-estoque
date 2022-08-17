@@ -5,10 +5,10 @@ import com.sge.exceptions.BadResourceException;
 import com.sge.exceptions.ResourceAlreadyExistsException;
 import com.sge.exceptions.ResourceNotFoundException;
 import com.sge.model.entity.Cliente;
-import com.sge.service.ClienteService;
+import com.sge.service.cliente.ClienteService;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -23,12 +23,12 @@ import java.net.URISyntaxException;
 
 @RestController
 @RequestMapping("/api")
+@RequiredArgsConstructor
 public class ClienteController {
 
     public static final Logger logger = LoggerFactory.getLogger(ClienteController.class);
 
-    @Autowired
-    private ClienteService clienteService;
+    private final ClienteService clienteService;
 
     @GetMapping(value = "/cliente", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -58,6 +58,7 @@ public class ClienteController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
+
     @PutMapping(value = "/cliente/{id}")
     public ResponseEntity<Cliente> updateCliente(@RequestBody Cliente cliente, @PathVariable Long id) {
         try {
@@ -73,6 +74,7 @@ public class ClienteController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
+
     @DeleteMapping(path = "/cliente/{id}")
     public ResponseEntity<Void> deleteClienteById(@PathVariable Long id) {
         try {

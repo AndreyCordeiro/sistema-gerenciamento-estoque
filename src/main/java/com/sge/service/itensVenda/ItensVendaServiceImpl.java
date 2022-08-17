@@ -1,4 +1,4 @@
-package com.sge.service;
+package com.sge.service.itensVenda;
 
 import com.sge.model.entity.ItensVenda;
 import com.sge.repository.ItensVendaRepository;
@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ItensVendaService {
+public class ItensVendaServiceImpl{
     @Autowired
     private ItensVendaRepository itensVendaRepository;
 

@@ -4,10 +4,10 @@ import com.sge.exceptions.BadResourceException;
 import com.sge.exceptions.ResourceAlreadyExistsException;
 import com.sge.exceptions.ResourceNotFoundException;
 import com.sge.model.entity.Fabricante;
-import com.sge.service.FabricanteService;
+import com.sge.service.fabricante.FabricanteService;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -22,12 +22,12 @@ import java.net.URISyntaxException;
 
 @RestController
 @RequestMapping("/api")
+@RequiredArgsConstructor
 public class FabricanteController {
 
     public static final Logger logger = LoggerFactory.getLogger(FabricanteController.class);
 
-    @Autowired
-    private FabricanteService fabricanteService;
+    private final FabricanteService fabricanteService;
 
     @GetMapping(value = "/fabricante", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -56,6 +56,7 @@ public class FabricanteController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
+
     @PutMapping(value = "/fabricante/{id}")
     public ResponseEntity<Fabricante> updateFabricante(@RequestBody Fabricante fabricante, @PathVariable Long id) {
         try {
@@ -71,6 +72,7 @@ public class FabricanteController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
+
     @DeleteMapping(path = "/fabricante/{id}")
     public ResponseEntity<Void> deleteFabricanteById(@PathVariable Long id) {
         try {
