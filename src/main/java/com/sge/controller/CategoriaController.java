@@ -4,10 +4,10 @@ import com.sge.exceptions.BadResourceException;
 import com.sge.exceptions.ResourceAlreadyExistsException;
 import com.sge.exceptions.ResourceNotFoundException;
 import com.sge.model.entity.Categoria;
-import com.sge.service.CategoriaService;
+import com.sge.service.categoria.CategoriaService;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -22,11 +22,11 @@ import java.net.URISyntaxException;
 
 @RestController
 @RequestMapping("/api")
+@RequiredArgsConstructor
 public class CategoriaController {
     public static final Logger logger = LoggerFactory.getLogger(CategoriaController.class);
 
-    @Autowired
-    private CategoriaService categoriaService;
+    private final CategoriaService categoriaService;
 
     @GetMapping(value = "/categoria", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)

@@ -1,4 +1,4 @@
-package com.sge.service;
+package com.sge.service.venda;
 
 import com.sge.exceptions.BadResourceException;
 import com.sge.exceptions.ResourceAlreadyExistsException;
@@ -6,6 +6,7 @@ import com.sge.exceptions.ResourceNotFoundException;
 import com.sge.model.entity.ItensVenda;
 import com.sge.model.entity.Venda;
 import com.sge.repository.VendaRepository;
+import com.sge.service.itensVenda.ItensVendaServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +17,13 @@ import org.springframework.stereotype.Service;
 import java.lang.module.ResolutionException;
 
 @Service
-public class VendaService extends ItensVendaService {
-    public static final Logger logger = LoggerFactory.getLogger(VendaService.class);
+public class VendaServiceImpl extends ItensVendaServiceImpl implements VendaService {
+    public static final Logger logger = LoggerFactory.getLogger(VendaServiceImpl.class);
 
     @Autowired
     private VendaRepository vendaRepository;
 
-    private Boolean existsById(Long id) {
+    public Boolean existsById(Long id) {
         return vendaRepository.existsById(id);
     }
 

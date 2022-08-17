@@ -1,4 +1,4 @@
-package com.sge.service;
+package com.sge.service.categoria;
 
 import com.sge.exceptions.BadResourceException;
 import com.sge.exceptions.ResourceAlreadyExistsException;
@@ -14,11 +14,11 @@ import org.springframework.util.StringUtils;
 import java.lang.module.ResolutionException;
 
 @Service
-public class CategoriaService {
+public class CategoriaServiceImpl implements CategoriaService {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
-    private Boolean existsById(Long id) {
+    public Boolean existsById(Long id) {
         return categoriaRepository.existsById(id);
     }
 

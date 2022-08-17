@@ -1,4 +1,4 @@
-package com.sge.service;
+package com.sge.service.produto;
 
 import com.sge.exceptions.BadResourceException;
 import com.sge.exceptions.ResourceAlreadyExistsException;
@@ -10,10 +10,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+
 import java.lang.module.ResolutionException;
 
 @Service
-public class ProdutoService {
+public class ProdutoServiceImpl implements ProdutoService {
     @Autowired
     private ProdutoRepository produtoRepository;
 
@@ -72,8 +73,8 @@ public class ProdutoService {
             produtoRepository.deleteById(id);
         }
     }
-    
+
     public Long count() {
-    	return produtoRepository.count();
+        return produtoRepository.count();
     }
 }

@@ -1,4 +1,4 @@
-package com.sge.service;
+package com.sge.service.funcionario;
 
 import com.sge.config.AppConfig;
 import com.sge.exceptions.BadResourceException;
@@ -8,6 +8,8 @@ import com.sge.model.entity.CargoFuncionario;
 import com.sge.model.entity.Funcionario;
 import com.sge.repository.CargoFuncionarioRepository;
 import com.sge.repository.FuncionarioRepository;
+import com.sge.service.cargo.CargoService;
+import com.sge.service.cargoFuncionario.CargoFuncionarioServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +21,8 @@ import org.springframework.util.StringUtils;
 import java.lang.module.ResolutionException;
 
 @Service
-public class FuncionarioService extends CargoFuncionarioService {
-    public static final Logger logger = LoggerFactory.getLogger(FuncionarioService.class);
+public class FuncionarioServiceImpl extends CargoFuncionarioServiceImpl implements FuncionarioService {
+    public static final Logger logger = LoggerFactory.getLogger(FuncionarioServiceImpl.class);
 
     @Autowired
     private FuncionarioRepository funcionarioRepository;
@@ -31,7 +33,7 @@ public class FuncionarioService extends CargoFuncionarioService {
     @Autowired
     private CargoService cargoService;
 
-    private Boolean existsById(Long id) {
+    public Boolean existsById(Long id) {
         return funcionarioRepository.existsById(id);
     }
 

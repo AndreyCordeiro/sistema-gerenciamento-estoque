@@ -1,4 +1,4 @@
-package com.sge.service;
+package com.sge.service.endereco;
 
 import com.sge.exceptions.ResourceNotFoundException;
 import com.sge.model.Endereco;
@@ -10,8 +10,8 @@ import org.springframework.web.client.RestTemplate;
 import java.lang.module.ResolutionException;
 
 @Service
-public class EnderecoService {
-    public static final Logger logger = LoggerFactory.getLogger(EnderecoService.class);
+public class EnderecoServiceImpl implements EnderecoService {
+    public static final Logger logger = LoggerFactory.getLogger(EnderecoServiceImpl.class);
 
     public Endereco findByCep(Long cep) throws ResourceNotFoundException {
         Endereco endereco = findByCepBrasilApi(cep);
@@ -24,7 +24,7 @@ public class EnderecoService {
         }
     }
 
-    private Endereco findByCepBrasilApi(Long cep) throws ResourceNotFoundException {
+    public Endereco findByCepBrasilApi(Long cep) throws ResourceNotFoundException {
         RestTemplate restTemplate = new RestTemplate();
         String url = "https://brasilapi.com.br/api/cep/v2/" + cep;
 
