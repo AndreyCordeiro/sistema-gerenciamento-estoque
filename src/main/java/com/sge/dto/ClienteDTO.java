@@ -1,6 +1,6 @@
 package com.sge.dto;
 
-import com.sge.model.entity.Cliente;
+import com.sge.model.entity.Pessoa;
 import lombok.Data;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
@@ -13,13 +13,13 @@ public class ClienteDTO {
     private String endereco;
     private String email;
 
-    public ClienteDTO convert(Cliente cliente) {
+    public ClienteDTO convert(Pessoa pessoa) {
         ClienteDTO clienteDTO = new ClienteDTO();
-        BeanUtils.copyProperties(cliente, clienteDTO);
+        BeanUtils.copyProperties(pessoa, clienteDTO);
         return clienteDTO;
     }
 
-    public Page<ClienteDTO> convertCliente(Page<Cliente> pageCliente) {
+    public Page<ClienteDTO> convertCliente(Page<Pessoa> pageCliente) {
         return pageCliente.map(this::convert);
     }
 }

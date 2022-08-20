@@ -5,9 +5,9 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "categoria")
+@Table(name = "permissao")
 @Data
-public class Categoria extends Auditavel {
+public class Permissao extends Auditavel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

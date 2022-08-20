@@ -4,7 +4,7 @@ import com.sge.config.AppConfig;
 import com.sge.exceptions.BadResourceException;
 import com.sge.exceptions.ResourceAlreadyExistsException;
 import com.sge.exceptions.ResourceNotFoundException;
-import com.sge.model.entity.Cliente;
+import com.sge.model.entity.Pessoa;
 import com.sge.repository.ClienteRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,44 +27,44 @@ public class ClienteServiceImpl implements ClienteService {
         return clienteRepository.existsById(id);
     }
 
-    public Cliente findById(Long id) {
-        Cliente cliente = clienteRepository.findById(id).orElse(null);
+    public Pessoa findById(Long id) {
+        Pessoa pessoa = clienteRepository.findById(id).orElse(null);
 
-        if (cliente == null) {
+        if (pessoa == null) {
             throw new ResolutionException("O cliente " + id + " não foi encontrado");
         } else {
-            return cliente;
+            return pessoa;
         }
     }
 
-    public Page<Cliente> findAll(Pageable pageable) {
+    public Page<Pessoa> findAll(Pageable pageable) {
         return clienteRepository.findAll(pageable);
     }
 
-    public Page<Cliente> findAllByNome(String nome, Pageable pageable) {
+    public Page<Pessoa> findAllByNome(String nome, Pageable pageable) {
         return clienteRepository.findByNome(nome, pageable);
     }
 
-    public Cliente saveCliente(Cliente cliente) throws BadResourceException, ResourceAlreadyExistsException {
-        if (cliente != null) {
-            cliente.setSenha(AppConfig.passwordEncoder().encode(cliente.getSenha()));
-            clienteRepository.save(cliente);
+    public Pessoa saveCliente(Pessoa pessoa) throws BadResourceException, ResourceAlreadyExistsException {
+        if (pessoa != null) {
+            pessoa.setSenha(AppConfig.passwordEncoder().encode(pessoa.getSenha()));
+            clienteRepository.save(pessoa);
 
-            logger.info("Cliente " + cliente.getId() + " salvo com sucesso!");
+            logger.info("Cliente " + pessoa.getId() + " salvo com sucesso!");
         } else {
             BadResourceException badResourceException = new BadResourceException("Erro ao salvar o cliente");
             badResourceException.addErrorMessage("O cliente está vazio ou é nulo");
             throw badResourceException;
         }
-        return cliente;
+        return pessoa;
     }
 
-    public void updateCliente(Cliente cliente) throws BadResourceException, ResourceNotFoundException {
-        if (!StringUtils.isEmpty(cliente.getNome())) {
-            if (!existsById(cliente.getId())) {
-                throw new ResourceNotFoundException("O cliente " + cliente.getId() + " não foi encontrado");
+    public void updateCliente(Pessoa pessoa) throws BadResourceException, ResourceNotFoundException {
+        if (!StringUtils.isEmpty(pessoa.getNome())) {
+            if (!existsById(pessoa.getId())) {
+                throw new ResourceNotFoundException("O cliente " + pessoa.getId() + " não foi encontrado");
             }
-            clienteRepository.save(cliente);
+            clienteRepository.save(pessoa);
         } else {
             BadResourceException badResourceException = new BadResourceException("Erro ao salvar o cliente");
             badResourceException.addErrorMessage("O Cliente está vazio ou é nulo");

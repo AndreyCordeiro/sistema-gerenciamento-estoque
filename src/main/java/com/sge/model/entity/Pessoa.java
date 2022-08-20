@@ -3,12 +3,11 @@ package com.sge.model.entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Table(name = "cliente")
 @Data
-public class Cliente implements Serializable {
+public class Pessoa extends Auditavel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -20,11 +19,11 @@ public class Cliente implements Serializable {
     @Column(name = "cpf")
     private String cpf;
 
-    @Column(name = "telefone")
-    private String telefone;
-
     @Column(name = "endereco")
     private String endereco;
+
+    @Column(name = "cep")
+    private String cep;
 
     @Column(name = "email")
     private String email;

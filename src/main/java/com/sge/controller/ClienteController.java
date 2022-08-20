@@ -4,7 +4,7 @@ import com.sge.dto.ClienteDTO;
 import com.sge.exceptions.BadResourceException;
 import com.sge.exceptions.ResourceAlreadyExistsException;
 import com.sge.exceptions.ResourceNotFoundException;
-import com.sge.model.entity.Cliente;
+import com.sge.model.entity.Pessoa;
 import com.sge.service.cliente.ClienteService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -42,17 +42,17 @@ public class ClienteController {
 
     @GetMapping(value = "/cliente/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ClienteDTO> findClienteById(@PathVariable Long id) {
-        Cliente cliente = clienteService.findById(id);
-        ClienteDTO clienteDTO = new ClienteDTO().convert(cliente);
+        Pessoa pessoa = clienteService.findById(id);
+        ClienteDTO clienteDTO = new ClienteDTO().convert(pessoa);
         return ResponseEntity.ok(clienteDTO);
     }
 
     @PostMapping(value = "/cliente")
-    public ResponseEntity<ClienteDTO> addCliente(@RequestBody Cliente cliente)
+    public ResponseEntity<ClienteDTO> addCliente(@RequestBody Pessoa pessoa)
             throws URISyntaxException {
         try {
-            Cliente clienteSalvo = clienteService.saveCliente(cliente);
-            return ResponseEntity.created(new URI("/api/cliente" + clienteSalvo.getId())).body(new ClienteDTO().convert(cliente));
+            Pessoa pessoaSalvo = clienteService.saveCliente(pessoa);
+            return ResponseEntity.created(new URI("/api/cliente" + pessoaSalvo.getId())).body(new ClienteDTO().convert(pessoa));
         } catch (ResourceAlreadyExistsException | BadResourceException e) {
             logger.error(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -60,10 +60,10 @@ public class ClienteController {
     }
 
     @PutMapping(value = "/cliente/{id}")
-    public ResponseEntity<Cliente> updateCliente(@RequestBody Cliente cliente, @PathVariable Long id) {
+    public ResponseEntity<Pessoa> updateCliente(@RequestBody Pessoa pessoa, @PathVariable Long id) {
         try {
-            cliente.setId(id);
-            clienteService.updateCliente(cliente);
+            pessoa.setId(id);
+            clienteService.updateCliente(pessoa);
             logger.info("Cliente " + id + " atualizado");
             return ResponseEntity.ok().build();
         } catch (ResourceNotFoundException ex) {

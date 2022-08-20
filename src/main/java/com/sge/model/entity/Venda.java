@@ -3,14 +3,13 @@ package com.sge.model.entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "venda")
 @Data
-public class Venda implements Serializable {
+public class Venda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -23,7 +22,7 @@ public class Venda implements Serializable {
     private Funcionario funcionario;
 
     @ManyToOne
-    private Cliente cliente;
+    private Pessoa pessoa;
 
     @Transient
     private List<ItensVenda> itensVenda;

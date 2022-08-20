@@ -5,9 +5,9 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "categoria")
+@Table(name = "cidade")
 @Data
-public class Categoria extends Auditavel {
+public class Cidade extends Auditavel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -15,4 +15,8 @@ public class Categoria extends Auditavel {
 
     @Column(name = "nome")
     private String nome;
+
+    @ManyToOne
+    @JoinColumn(name = "id_estado")
+    private Estado estado;
 }

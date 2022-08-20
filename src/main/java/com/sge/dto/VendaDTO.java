@@ -1,6 +1,6 @@
 package com.sge.dto;
 
-import com.sge.model.entity.Cliente;
+import com.sge.model.entity.Pessoa;
 import com.sge.model.entity.Funcionario;
 import com.sge.model.entity.ItensVenda;
 import com.sge.model.entity.Venda;
@@ -13,7 +13,7 @@ import java.util.List;
 public class VendaDTO {
     private Date dataVenda;
     private Funcionario funcionario;
-    private Cliente cliente;
+    private Pessoa pessoa;
     private List<ItensVenda> itensVenda;
 
     public VendaDTO convert(Venda venda) {

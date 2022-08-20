@@ -41,7 +41,7 @@ public class ProdutoServiceImpl implements ProdutoService {
     }
 
     public Produto saveProduto(Produto produto) throws BadResourceException, ResourceAlreadyExistsException {
-        if (!StringUtils.isEmpty(produto.getNome())) {
+        if (!StringUtils.isEmpty(produto.getDescricaoCurta())) {
             if (produto.getId() != null && existsById(produto.getId())) {
                 throw new ResourceAlreadyExistsException("O produto " + produto.getId() + " não foi encontrado");
             }
@@ -54,7 +54,7 @@ public class ProdutoServiceImpl implements ProdutoService {
     }
 
     public void updateProduto(Produto produto) throws BadResourceException, ResourceNotFoundException {
-        if (!StringUtils.isEmpty(produto.getNome())) {
+        if (!StringUtils.isEmpty(produto.getDescricaoCurta())) {
             if (!existsById(produto.getId())) {
                 throw new ResourceNotFoundException("O produto " + produto.getId() + " não foi encontrado");
             }

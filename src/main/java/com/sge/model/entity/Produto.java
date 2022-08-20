@@ -3,32 +3,33 @@ package com.sge.model.entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Table(name = "produto")
 @Data
-public class Produto implements Serializable {
+public class Produto extends Auditavel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "nome")
-    private String nome;
+    @Column(name = "descricao_curta")
+    private String descricaoCurta;
 
-    @Column(name = "descricao")
-    private String descricao;
+    @Column(name = "descricao_detalhada")
+    private String descricaoDetalhada;
 
-    @Column(name = "preco")
-    private Double preco;
+    @Column(name = "valor_custo")
+    private Double valorCusto;
+
+    @Column(name = "valor_venda")
+    private Double valorVenda;
 
     @ManyToOne
-    private Fabricante fabricante;
+    @JoinColumn(name = "id_marca")
+    private Marca marca;
 
     @ManyToOne
+    @JoinColumn(name = "id_categoria")
     private Categoria categoria;
-
-    @Column(name = "quantidade")
-    private Double quantidade;
 }
