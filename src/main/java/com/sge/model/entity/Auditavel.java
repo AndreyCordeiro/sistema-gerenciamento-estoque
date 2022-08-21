@@ -1,5 +1,6 @@
 package com.sge.model.entity;
 
+import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
@@ -12,6 +13,7 @@ import java.util.Date;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
+@Data
 public abstract class Auditavel implements Serializable {
     private static final long serialVersionUID = 1L;
 

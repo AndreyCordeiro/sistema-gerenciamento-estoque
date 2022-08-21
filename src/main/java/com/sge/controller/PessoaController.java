@@ -1,7 +1,7 @@
 package com.sge.controller;
 
-import com.sge.model.entity.Produto;
-import com.sge.service.produto.ProdutoService;
+import com.sge.model.entity.Pessoa;
+import com.sge.service.cliente.PessoaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,30 +10,30 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/produto")
+@RequestMapping("/api/pessoa")
 @RequiredArgsConstructor
-public class ProdutoController {
+public class PessoaController {
     @Autowired
-    private ProdutoService produtoService;
+    private PessoaService pessoaService;
 
     @GetMapping("/")
-    public List<Produto> buscarTodos() {
-        return produtoService.buscarTodos();
+    public List<Pessoa> buscarTodos() {
+        return pessoaService.buscarTodos();
     }
 
     @PostMapping("/")
-    public Produto inserir(@RequestBody Produto objeto) {
-        return produtoService.inserir(objeto);
+    public Pessoa inserir(@RequestBody Pessoa objeto) {
+        return pessoaService.inserir(objeto);
     }
 
     @PutMapping("/")
-    public Produto alterar(@RequestBody Produto objeto) {
-        return produtoService.alterar(objeto);
+    public Pessoa alterar(@RequestBody Pessoa objeto) {
+        return pessoaService.alterar(objeto);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> excluir(@PathVariable("id") Long id) {
-        produtoService.excluir(id);
+        pessoaService.excluir(id);
         return ResponseEntity.ok().build();
     }
 }

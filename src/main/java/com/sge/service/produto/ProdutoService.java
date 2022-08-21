@@ -1,24 +1,15 @@
 package com.sge.service.produto;
 
-import com.sge.exceptions.BadResourceException;
-import com.sge.exceptions.ResourceAlreadyExistsException;
-import com.sge.exceptions.ResourceNotFoundException;
 import com.sge.model.entity.Produto;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 public interface ProdutoService {
-    Produto findById(Long id);
+    List<Produto> buscarTodos();
 
-    Page<Produto> findAll(Pageable pageable);
+    Produto inserir(Produto objeto);
 
-    Page<Produto> findAllByNome(String nome, Pageable pageable);
+    Produto alterar(Produto objeto);
 
-    Produto saveProduto(Produto produto) throws BadResourceException, ResourceAlreadyExistsException;
-
-    void updateProduto(Produto produto) throws BadResourceException, ResourceNotFoundException;
-
-    void deleteById(Long id) throws ResourceNotFoundException;
-
-    Long count();
+    void excluir(Long id);
 }
