@@ -1,12 +1,14 @@
 package com.sge.service.categoria;
 
+import com.sge.exceptions.InfoException;
 import com.sge.model.entity.Categoria;
 import com.sge.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoriaServiceImpl implements CategoriaService {
@@ -17,19 +19,38 @@ public class CategoriaServiceImpl implements CategoriaService {
         return categoriaRepository.findAll();
     }
 
-    public Categoria inserir(Categoria objeto) {
-        objeto.setDataCriacao(new Date());
-        Categoria objetoNovo = categoriaRepository.saveAndFlush(objeto);
-        return objetoNovo;
+    public Categoria inserir(Categoria categoria) throws InfoException {
+        if (categoria.getNome() != null) {
+            return categoriaRepository.save(categoria);
+        } else {
+            throw new InfoException("Ocorreu um erro ao cadastrar categoria", HttpStatus.BAD_REQUEST);
+        }
     }
 
-    public Categoria alterar(Categoria objeto) {
-        objeto.setDataAtualizacao(new Date());
-        return categoriaRepository.saveAndFlush(objeto);
+    public Categoria alterar(Long id, Categoria categoria) throws InfoException {
+        Optional<Categoria> categoriaOptional = categoriaRepository.findById(id);
+
+        if (categoriaOptional.isPresent() && categoria.getNome() != null) {
+            Categoria categoriaBuilder = Categoria.builder()
+                    .id(id)
+                    .nome(categoria.getNome())
+                    .build();
+
+            categoriaRepository.save(categoriaBuilder);
+
+            return categoriaBuilder;
+        } else {
+            throw new InfoException("Categoria não encontrada", HttpStatus.NOT_FOUND);
+        }
     }
 
-    public void excluir(Long id) {
-        Categoria objeto = categoriaRepository.findById(id).get();
-        categoriaRepository.delete(objeto);
+    public void excluir(Long id) throws InfoException {
+        Optional<Categoria> categoria = categoriaRepository.findById(id);
+
+        if (categoria.isPresent()) {
+            categoriaRepository.delete(categoria.get());
+        } else {
+            throw new InfoException("Categoria não encontrada", HttpStatus.NOT_FOUND);
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.sge.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -14,6 +15,7 @@ import java.util.Date;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 @Data
+@JsonIgnoreProperties(value = {"dataCriacao", "dataAtualizacao"}, allowGetters = true)
 public abstract class Auditavel implements Serializable {
     private static final long serialVersionUID = 1L;
 
