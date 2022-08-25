@@ -22,13 +22,13 @@ public class CategoriaController {
     }
 
     @PostMapping("/cadastrar")
-    public Categoria inserir(@RequestBody Categoria objeto) throws InfoException {
-        return categoriaService.inserir(objeto);
+    public Categoria inserir(@RequestBody Categoria categoria) throws InfoException {
+        return categoriaService.inserir(categoria);
     }
 
     @PutMapping("/atualizar/{id}")
-    public Categoria alterar(@PathVariable("id") Long id, @RequestBody Categoria objeto) throws InfoException {
-        return categoriaService.alterar(id, objeto);
+    public Categoria alterar(@PathVariable("id") Long id, @RequestBody Categoria categoria) throws InfoException {
+        return categoriaService.alterar(id, categoria);
     }
 
     @DeleteMapping("/deletar/{id}")

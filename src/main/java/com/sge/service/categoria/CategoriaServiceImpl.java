@@ -20,7 +20,7 @@ public class CategoriaServiceImpl implements CategoriaService {
     }
 
     public Categoria inserir(Categoria categoria) throws InfoException {
-        if (categoria.getNome() != null) {
+        if (categoria.getNome() != null && !categoria.getNome().equals("")) {
             return categoriaRepository.save(categoria);
         } else {
             throw new InfoException("Ocorreu um erro ao cadastrar categoria", HttpStatus.BAD_REQUEST);
@@ -30,7 +30,7 @@ public class CategoriaServiceImpl implements CategoriaService {
     public Categoria alterar(Long id, Categoria categoria) throws InfoException {
         Optional<Categoria> categoriaOptional = categoriaRepository.findById(id);
 
-        if (categoriaOptional.isPresent() && categoria.getNome() != null) {
+        if (categoriaOptional.isPresent() && categoria.getNome() != null  && !categoria.getNome().equals("")) {
             Categoria categoriaBuilder = Categoria.builder()
                     .id(id)
                     .nome(categoria.getNome())
