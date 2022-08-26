@@ -1,7 +1,7 @@
 package com.sge.controller;
 
-import com.sge.model.entity.Pessoa;
-import com.sge.service.cliente.PessoaService;
+import com.sge.entity.Pessoa;
+import com.sge.service.pessoa.PessoaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

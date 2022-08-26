@@ -1,6 +1,6 @@
 package com.sge.controller;
 
-import com.sge.model.entity.Cidade;
+import com.sge.entity.Cidade;
 import com.sge.service.cidade.CidadeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

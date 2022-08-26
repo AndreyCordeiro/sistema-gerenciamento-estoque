@@ -1,7 +1,7 @@
 package com.sge.service.produto;
 
 import com.sge.exceptions.InfoException;
-import com.sge.model.entity.Produto;
+import com.sge.entity.Produto;
 import com.sge.repository.ProdutoRepository;
 import com.sge.util.UtilProduto;
 import org.springframework.beans.factory.annotation.Autowired;

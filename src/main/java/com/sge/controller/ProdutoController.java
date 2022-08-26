@@ -1,7 +1,7 @@
 package com.sge.controller;
 
 import com.sge.exceptions.InfoException;
-import com.sge.model.entity.Produto;
+import com.sge.entity.Produto;
 import com.sge.service.produto.ProdutoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

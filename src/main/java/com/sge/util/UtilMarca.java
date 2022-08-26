@@ -1,7 +1,7 @@
 package com.sge.util;
 
 import com.sge.exceptions.InfoException;
-import com.sge.model.entity.Marca;
+import com.sge.entity.Marca;
 import org.springframework.http.HttpStatus;
 
 public class UtilMarca {

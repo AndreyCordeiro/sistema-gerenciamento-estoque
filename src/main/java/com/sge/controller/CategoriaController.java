@@ -1,7 +1,7 @@
 package com.sge.controller;
 
 import com.sge.exceptions.InfoException;
-import com.sge.model.entity.Categoria;
+import com.sge.entity.Categoria;
 import com.sge.service.categoria.CategoriaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

@@ -1,6 +1,6 @@
 package com.sge.controller;
 
-import com.sge.model.entity.Estado;
+import com.sge.entity.Estado;
 import com.sge.service.estado.EstadoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

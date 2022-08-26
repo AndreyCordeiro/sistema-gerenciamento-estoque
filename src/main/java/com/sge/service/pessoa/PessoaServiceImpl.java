@@ -1,6 +1,6 @@
-package com.sge.service.cliente;
+package com.sge.service.pessoa;
 
-import com.sge.model.entity.Pessoa;
+import com.sge.entity.Pessoa;
 import com.sge.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

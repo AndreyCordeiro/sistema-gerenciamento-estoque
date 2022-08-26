@@ -1,6 +1,6 @@
 package com.sge.service.estado;
 
-import com.sge.model.entity.Estado;
+import com.sge.entity.Estado;
 
 import java.util.List;
 

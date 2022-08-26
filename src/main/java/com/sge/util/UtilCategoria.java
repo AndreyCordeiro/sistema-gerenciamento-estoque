@@ -1,7 +1,7 @@
 package com.sge.util;
 
 import com.sge.exceptions.InfoException;
-import com.sge.model.entity.Categoria;
+import com.sge.entity.Categoria;
 import org.springframework.http.HttpStatus;
 
 public class UtilCategoria {

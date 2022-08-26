@@ -1,6 +1,6 @@
 package com.sge.service.cidade;
 
-import com.sge.model.entity.Cidade;
+import com.sge.entity.Cidade;
 import com.sge.repository.CidadeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

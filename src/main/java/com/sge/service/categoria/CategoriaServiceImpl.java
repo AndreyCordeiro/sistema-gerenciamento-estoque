@@ -1,7 +1,7 @@
 package com.sge.service.categoria;
 
 import com.sge.exceptions.InfoException;
-import com.sge.model.entity.Categoria;
+import com.sge.entity.Categoria;
 import com.sge.repository.CategoriaRepository;
 import com.sge.util.UtilCategoria;
 import org.springframework.beans.factory.annotation.Autowired;

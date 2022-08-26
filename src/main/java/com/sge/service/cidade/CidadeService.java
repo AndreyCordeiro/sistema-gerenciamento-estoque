@@ -1,6 +1,6 @@
 package com.sge.service.cidade;
 
-import com.sge.model.entity.Cidade;
+import com.sge.entity.Cidade;
 
 import java.util.List;
 

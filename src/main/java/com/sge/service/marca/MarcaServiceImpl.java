@@ -1,7 +1,7 @@
 package com.sge.service.marca;
 
 import com.sge.exceptions.InfoException;
-import com.sge.model.entity.Marca;
+import com.sge.entity.Marca;
 import com.sge.repository.MarcaRepository;
 import com.sge.util.UtilMarca;
 import org.springframework.beans.factory.annotation.Autowired;

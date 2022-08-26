@@ -1,7 +1,7 @@
 package com.sge.service.produto;
 
 import com.sge.exceptions.InfoException;
-import com.sge.model.entity.Produto;
+import com.sge.entity.Produto;
 
 import java.util.List;
 

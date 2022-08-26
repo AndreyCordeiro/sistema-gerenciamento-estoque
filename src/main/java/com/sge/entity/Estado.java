@@ -1,16 +1,13 @@
-package com.sge.model.entity;
+package com.sge.entity;
 
-import lombok.*;
+import lombok.Data;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "marca")
-@Builder
+@Table(name = "estado")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class Marca extends Auditavel {
+public class Estado extends Auditavel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -18,4 +15,7 @@ public class Marca extends Auditavel {
 
     @Column(name = "nome")
     private String nome;
+
+    @Column(name = "sigla")
+    private String sigla;
 }

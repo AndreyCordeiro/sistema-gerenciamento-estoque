@@ -1,6 +1,6 @@
 package com.sge.service.permissao;
 
-import com.sge.model.entity.Permissao;
+import com.sge.entity.Permissao;
 import com.sge.repository.PermissaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

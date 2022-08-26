@@ -1,7 +1,7 @@
 package com.sge.service.marca;
 
 import com.sge.exceptions.InfoException;
-import com.sge.model.entity.Marca;
+import com.sge.entity.Marca;
 
 import java.util.List;
 

@@ -1,13 +1,13 @@
-package com.sge.model.entity;
+package com.sge.entity;
 
 import lombok.Data;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "estado")
+@Table(name = "cidade")
 @Data
-public class Estado extends Auditavel {
+public class Cidade extends Auditavel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -16,6 +16,7 @@ public class Estado extends Auditavel {
     @Column(name = "nome")
     private String nome;
 
-    @Column(name = "sigla")
-    private String sigla;
+    @ManyToOne
+    @JoinColumn(name = "id_estado")
+    private Estado estado;
 }

@@ -1,6 +1,6 @@
 package com.sge.service.estado;
 
-import com.sge.model.entity.Estado;
+import com.sge.entity.Estado;
 import com.sge.repository.EstadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

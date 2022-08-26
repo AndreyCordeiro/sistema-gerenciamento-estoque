@@ -1,7 +1,7 @@
 package com.sge.controller;
 
 import com.sge.exceptions.InfoException;
-import com.sge.model.entity.Marca;
+import com.sge.entity.Marca;
 import com.sge.service.marca.MarcaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

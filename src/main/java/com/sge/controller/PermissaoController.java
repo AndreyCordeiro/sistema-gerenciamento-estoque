@@ -1,6 +1,6 @@
 package com.sge.controller;
 
-import com.sge.model.entity.Permissao;
+import com.sge.entity.Permissao;
 import com.sge.service.permissao.PermissaoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package com.sge.service.permissao;
 
-import com.sge.model.entity.Permissao;
+import com.sge.entity.Permissao;
 
 import java.util.List;
 
