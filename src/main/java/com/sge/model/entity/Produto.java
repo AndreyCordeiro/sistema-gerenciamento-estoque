@@ -1,12 +1,15 @@
 package com.sge.model.entity;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "produto")
+@Builder
 @Data
+@NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Produto extends Auditavel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

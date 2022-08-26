@@ -1,5 +1,6 @@
 package com.sge.controller;
 
+import com.sge.exceptions.InfoException;
 import com.sge.model.entity.Produto;
 import com.sge.service.produto.ProdutoService;
 import lombok.RequiredArgsConstructor;
@@ -16,23 +17,23 @@ public class ProdutoController {
     @Autowired
     private ProdutoService produtoService;
 
-    @GetMapping("/")
+    @GetMapping("")
     public List<Produto> buscarTodos() {
         return produtoService.buscarTodos();
     }
 
-    @PostMapping("/")
-    public Produto inserir(@RequestBody Produto objeto) {
-        return produtoService.inserir(objeto);
+    @PostMapping("/cadastrar")
+    public Produto inserir(@RequestBody Produto produto) throws InfoException {
+        return produtoService.inserir(produto);
     }
 
-    @PutMapping("/")
-    public Produto alterar(@RequestBody Produto objeto) {
-        return produtoService.alterar(objeto);
+    @PutMapping("/atualizar/{id}")
+    public Produto alterar(@PathVariable("id") Long id, @RequestBody Produto produto) throws InfoException {
+        return produtoService.alterar(id, produto);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> excluir(@PathVariable("id") Long id) {
+    @DeleteMapping("/deletar/{id}")
+    public ResponseEntity<Void> excluir(@PathVariable("id") Long id) throws InfoException {
         produtoService.excluir(id);
         return ResponseEntity.ok().build();
     }

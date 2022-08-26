@@ -3,6 +3,7 @@ package com.sge.service.marca;
 import com.sge.exceptions.InfoException;
 import com.sge.model.entity.Marca;
 import com.sge.repository.MarcaRepository;
+import com.sge.util.UtilMarca;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class MarcaServiceImpl implements MarcaService {
     }
 
     public Marca inserir(Marca marca) throws InfoException {
-        if (marca.getNome() != null && !marca.getNome().equals("")) {
+        if (UtilMarca.validarMarca(marca)) {
             return marcaRepository.save(marca);
         } else {
             throw new InfoException("Ocorreu um erro ao cadastrar marca", HttpStatus.BAD_REQUEST);
@@ -30,14 +31,15 @@ public class MarcaServiceImpl implements MarcaService {
     public Marca alterar(Long id, Marca marca) throws InfoException {
         Optional<Marca> marcaOptional = marcaRepository.findById(id);
 
-        if (marcaOptional.isPresent() && marca.getNome() != null && !marca.getNome().equals("")) {
+        if (marcaOptional.isPresent()) {
             Marca marcaBuilder = Marca.builder()
                     .id(id)
                     .nome(marca.getNome())
                     .build();
 
-            marcaRepository.save(marcaBuilder);
-
+            if (UtilMarca.validarMarca(marcaBuilder)) {
+                marcaRepository.save(marcaBuilder);
+            }
             return marcaBuilder;
         } else {
             throw new InfoException("Categoria não encontrada", HttpStatus.NOT_FOUND);
