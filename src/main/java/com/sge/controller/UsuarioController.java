@@ -1,5 +1,6 @@
 package com.sge.controller;
 
+import com.sge.dto.UsuarioDTO;
 import com.sge.entity.Usuario;
 import com.sge.exceptions.InfoException;
 import com.sge.service.usuario.UsuarioService;
@@ -16,17 +17,17 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @GetMapping("")
-    public List<Usuario> buscarTodos() {
+    public List<UsuarioDTO> buscarTodos() {
         return usuarioService.buscarTodos();
     }
 
     @PostMapping("/cadastrar")
-    public Usuario inserir(@RequestBody Usuario usuario, @RequestParam String tipoUsuario) throws InfoException {
+    public UsuarioDTO inserir(@RequestBody Usuario usuario, @RequestParam String tipoUsuario) throws InfoException {
         return usuarioService.inserir(usuario, tipoUsuario);
     }
 
     @PutMapping("/atualizar/{id}")
-    public Usuario alterar(@PathVariable("id") Long id, @RequestBody Usuario usuario, @RequestParam String tipoUsuario) throws InfoException {
+    public UsuarioDTO alterar(@PathVariable("id") Long id, @RequestBody Usuario usuario, @RequestParam String tipoUsuario) throws InfoException {
         return usuarioService.alterar(id, usuario, tipoUsuario);
     }
 

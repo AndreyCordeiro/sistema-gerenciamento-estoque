@@ -1,5 +1,6 @@
 package com.sge.util;
 
+import com.sge.dto.ClienteDTO;
 import com.sge.entity.Cliente;
 import com.sge.exceptions.InfoException;
 import org.springframework.http.HttpStatus;
@@ -25,5 +26,15 @@ public class UtilCliente {
             throw new InfoException("MESSAGE.SENHA_REQUIRED", HttpStatus.BAD_REQUEST);
         }
         return true;
+    }
+
+    public static ClienteDTO converteCliente(Cliente cliente) {
+        return ClienteDTO.builder()
+                .nome(cliente.getNome())
+                .documento(cliente.getDocumento())
+                .endereco(cliente.getEndereco())
+                .cep(cliente.getCep())
+                .email(cliente.getEmail())
+                .build();
     }
 }

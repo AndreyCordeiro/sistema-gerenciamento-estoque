@@ -1,9 +1,9 @@
 package com.sge.controller;
 
+import com.sge.dto.VendaDTO;
 import com.sge.entity.Venda;
 import com.sge.exceptions.InfoException;
 import com.sge.service.venda.VendaService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,12 +17,12 @@ public class VendaContoller {
     private VendaService vendaService;
 
     @GetMapping("")
-    public List<Venda> buscarTodos() {
+    public List<VendaDTO> buscarTodos() {
         return vendaService.buscarTodos();
     }
 
     @PostMapping("/cadastrar")
-    public Venda inserir(@RequestBody Venda venda) throws InfoException {
+    public VendaDTO inserir(@RequestBody Venda venda) throws InfoException {
         return vendaService.inserir(venda);
     }
 

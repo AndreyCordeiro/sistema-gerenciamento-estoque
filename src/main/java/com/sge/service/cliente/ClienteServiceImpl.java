@@ -1,5 +1,6 @@
 package com.sge.service.cliente;
 
+import com.sge.dto.ClienteDTO;
 import com.sge.entity.Cliente;
 import com.sge.exceptions.InfoException;
 import com.sge.repository.ClienteRepository;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,22 +19,31 @@ public class ClienteServiceImpl implements ClienteService {
     @Autowired
     private ClienteRepository clienteRepository;
 
-    public List<Cliente> buscarTodos() {
-        return clienteRepository.findAll();
+    public List<ClienteDTO> buscarTodos() {
+        List<Cliente> listaClientes = clienteRepository.findAll();
+
+        List<ClienteDTO> clienteDTOList = new ArrayList<>();
+        if (listaClientes.size() > 0) {
+            for (Cliente cliente : listaClientes) {
+                clienteDTOList.add(UtilCliente.converteCliente(cliente));
+            }
+        }
+        return clienteDTOList;
     }
 
     @Override
-    public Cliente inserir(Cliente cliente) throws InfoException {
+    public ClienteDTO inserir(Cliente cliente) throws InfoException {
         if (UtilCliente.validarCliente(cliente)) {
             cliente.setSenha(UtilCriptografia.passwordEncoder().encode(cliente.getSenha()));
-            return clienteRepository.save(cliente);
+            clienteRepository.save(cliente);
+            return UtilCliente.converteCliente(cliente);
         } else {
             throw new InfoException("Ocorreu um erro ao cadastrar cliente", HttpStatus.BAD_REQUEST);
         }
     }
 
     @Override
-    public Cliente alterar(Long id, Cliente cliente) throws InfoException {
+    public ClienteDTO alterar(Long id, Cliente cliente) throws InfoException {
         Optional<Cliente> optionalCliente = clienteRepository.findById(id);
 
         if (optionalCliente.isPresent()) {
@@ -49,7 +60,7 @@ public class ClienteServiceImpl implements ClienteService {
             if (UtilCliente.validarCliente(clienteBuilder)) {
                 clienteRepository.save(clienteBuilder);
             }
-            return clienteBuilder;
+            return UtilCliente.converteCliente(cliente);
         } else {
             throw new InfoException("Cliente não encontrado", HttpStatus.NOT_FOUND);
         }

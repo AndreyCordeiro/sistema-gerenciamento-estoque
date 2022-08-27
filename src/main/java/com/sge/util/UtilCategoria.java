@@ -1,7 +1,8 @@
 package com.sge.util;
 
-import com.sge.exceptions.InfoException;
+import com.sge.dto.CategoriaDTO;
 import com.sge.entity.Categoria;
+import com.sge.exceptions.InfoException;
 import org.springframework.http.HttpStatus;
 
 public class UtilCategoria {
@@ -10,5 +11,11 @@ public class UtilCategoria {
             throw new InfoException("MESSAGE.NOME_REQUIRED", HttpStatus.BAD_REQUEST);
         }
         return true;
+    }
+
+    public static CategoriaDTO converteCategoria(Categoria categoria) {
+        return CategoriaDTO.builder()
+                .nome(categoria.getNome())
+                .build();
     }
 }

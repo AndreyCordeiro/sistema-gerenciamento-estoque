@@ -1,5 +1,6 @@
 package com.sge.controller;
 
+import com.sge.dto.ClienteDTO;
 import com.sge.entity.Cliente;
 import com.sge.exceptions.InfoException;
 import com.sge.service.cliente.ClienteService;
@@ -16,17 +17,17 @@ public class ClienteController {
     private ClienteService clienteService;
 
     @GetMapping("")
-    public List<Cliente> buscarTodos() {
+    public List<ClienteDTO> buscarTodos() {
         return clienteService.buscarTodos();
     }
 
     @PostMapping("/cadastrar")
-    public Cliente inserir(@RequestBody Cliente cliente) throws InfoException {
+    public ClienteDTO inserir(@RequestBody Cliente cliente) throws InfoException {
         return clienteService.inserir(cliente);
     }
 
     @PutMapping("/atualizar/{id}")
-    public Cliente alterar(@PathVariable("id") Long id, @RequestBody Cliente cliente) throws InfoException {
+    public ClienteDTO alterar(@PathVariable("id") Long id, @RequestBody Cliente cliente) throws InfoException {
         return clienteService.alterar(id, cliente);
     }
 

@@ -1,11 +1,12 @@
 package com.sge.util;
 
+import com.sge.dto.UsuarioDTO;
 import com.sge.entity.Usuario;
 import com.sge.exceptions.InfoException;
 import org.springframework.http.HttpStatus;
 
-public class UtilPessoa {
-    public static Boolean validarPessoa(Usuario usuario) throws InfoException {
+public class UtilUsuario {
+    public static Boolean validarUsuario(Usuario usuario) throws InfoException {
         if (usuario.getNome() == null || usuario.getNome().equals("")) {
             throw new InfoException("MESSAGE.NOME_REQUIRED", HttpStatus.BAD_REQUEST);
         }
@@ -25,5 +26,16 @@ public class UtilPessoa {
             throw new InfoException("MESSAGE.SENHA_REQUIRED", HttpStatus.BAD_REQUEST);
         }
         return true;
+    }
+
+    public static UsuarioDTO converteUsuario(Usuario usuario) {
+        return UsuarioDTO.builder()
+                .nome(usuario.getNome())
+                .documento(usuario.getDocumento())
+                .endereco(usuario.getEndereco())
+                .tipoUsuario(usuario.getTipoUsuario() != null ? usuario.getTipoUsuario().toString() : null)
+                .cep(usuario.getCep())
+                .email(usuario.getEmail())
+                .build();
     }
 }

@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,5 +14,5 @@ import lombok.NoArgsConstructor;
 public class VendaDTO {
     private UsuarioDTO usuario;
     private ClienteDTO cliente;
-    private ItensVendaDTO itensVenda;
+    private List<ItensVendaDTO> itensVenda;
 }

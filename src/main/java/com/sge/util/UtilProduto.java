@@ -1,5 +1,6 @@
 package com.sge.util;
 
+import com.sge.dto.ProdutoDTO;
 import com.sge.entity.Produto;
 import com.sge.exceptions.InfoException;
 import org.springframework.http.HttpStatus;
@@ -22,5 +23,16 @@ public class UtilProduto {
             throw new InfoException("MESSAGE.CATEGORIA_REQUIRED", HttpStatus.BAD_REQUEST);
         }
         return true;
+    }
+
+    public static ProdutoDTO converterProduto(Produto produto) {
+        return ProdutoDTO.builder()
+                .nome(produto.getNome())
+                .descricao(produto.getDescricao())
+                .valorCusto(produto.getValorCusto())
+                .valorVenda(produto.getValorVenda())
+                .fabricante(produto.getFabricante() != null ? UtilFabricante.converteFabricante(produto.getFabricante()) : null)
+                .categoria(produto.getCategoria() != null ? UtilCategoria.converteCategoria(produto.getCategoria()) : null)
+                .build();
     }
 }
