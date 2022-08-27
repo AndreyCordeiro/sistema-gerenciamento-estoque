@@ -5,12 +5,12 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "marca")
+@Table(name = "fabricante")
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class Marca extends Auditavel {
+public class Fabricante extends Auditavel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

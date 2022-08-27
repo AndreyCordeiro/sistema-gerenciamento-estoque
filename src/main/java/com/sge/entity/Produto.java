@@ -16,11 +16,11 @@ public class Produto extends Auditavel {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "descricao_curta")
-    private String descricaoCurta;
+    @Column(name = "nome")
+    private String nome;
 
-    @Column(name = "descricao_detalhada")
-    private String descricaoDetalhada;
+    @Column(name = "descricao")
+    private String descricao;
 
     @Column(name = "valor_custo")
     private Double valorCusto;
@@ -29,8 +29,8 @@ public class Produto extends Auditavel {
     private Double valorVenda;
 
     @ManyToOne
-    @JoinColumn(name = "id_marca")
-    private Marca marca;
+    @JoinColumn(name = "id_fabricante")
+    private Fabricante fabricante;
 
     @ManyToOne
     @JoinColumn(name = "id_categoria")

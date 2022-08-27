@@ -1,12 +1,12 @@
 package com.sge.util;
 
+import com.sge.entity.Fabricante;
 import com.sge.exceptions.InfoException;
-import com.sge.entity.Marca;
 import org.springframework.http.HttpStatus;
 
-public class UtilMarca {
-    public static Boolean validarMarca(Marca marca) throws InfoException {
-        if (marca.getNome() == null || marca.getNome().equals("")) {
+public class UtilFabricante {
+    public static Boolean validarFabricante(Fabricante fabricante) throws InfoException {
+        if (fabricante.getNome() == null || fabricante.getNome().equals("")) {
             throw new InfoException("MESSAGE.NOME_REQUIRED", HttpStatus.BAD_REQUEST);
         }
         return true;

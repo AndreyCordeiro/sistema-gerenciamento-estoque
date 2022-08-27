@@ -34,11 +34,11 @@ public class ProdutoServiceImpl implements ProdutoService {
         if (optionalProduto.isPresent()) {
             Produto produtoBuilder = Produto.builder()
                     .id(id)
-                    .descricaoCurta(produto.getDescricaoCurta() != null ? produto.getDescricaoCurta() : null)
-                    .descricaoDetalhada(produto.getDescricaoDetalhada() != null ? produto.getDescricaoDetalhada() : null)
+                    .nome(produto.getNome() != null ? produto.getNome() : null)
+                    .descricao(produto.getDescricao() != null ? produto.getDescricao() : null)
                     .valorCusto(produto.getValorCusto() != null ? produto.getValorCusto() : null)
                     .valorVenda(produto.getValorVenda() != null ? produto.getValorVenda() : null)
-                    .marca(produto.getMarca() != null ? produto.getMarca() : null)
+                    .fabricante(produto.getFabricante() != null ? produto.getFabricante() : null)
                     .categoria(produto.getCategoria() != null ? produto.getCategoria() : null)
                     .build();
 

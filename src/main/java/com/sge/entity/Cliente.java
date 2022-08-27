@@ -5,12 +5,12 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "pessoa")
+@Table(name = "cliente")
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class Pessoa extends Auditavel {
+public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -19,8 +19,8 @@ public class Pessoa extends Auditavel {
     @Column(name = "nome")
     private String nome;
 
-    @Column(name = "cpf")
-    private String cpf;
+    @Column(name = "documento")
+    private String documento;
 
     @Column(name = "endereco")
     private String endereco;
