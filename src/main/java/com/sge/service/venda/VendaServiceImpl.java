@@ -28,7 +28,7 @@ public class VendaServiceImpl extends ItensVendaServiceImpl implements VendaServ
         if (UtilVenda.validarVenda(venda)) {
             for (ItensVenda itensVenda : venda.getItensVenda()) {
                 itensVenda.setVenda(venda);
-                inserir(itensVenda);
+                inserirItensVenda(itensVenda);
             }
             return vendaRepository.save(venda);
         } else {
@@ -41,6 +41,7 @@ public class VendaServiceImpl extends ItensVendaServiceImpl implements VendaServ
         Optional<Venda> venda = vendaRepository.findById(id);
 
         if (venda.isPresent()) {
+            excluirItensVenda(id);
             vendaRepository.delete(venda.get());
         } else {
             throw new InfoException("Venda não encontrada", HttpStatus.NOT_FOUND);

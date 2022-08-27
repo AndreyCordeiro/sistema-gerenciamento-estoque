@@ -11,5 +11,4 @@ public interface VendaService {
     Venda inserir(Venda venda) throws InfoException;
 
     void excluir(Long id) throws InfoException;
-
 }
