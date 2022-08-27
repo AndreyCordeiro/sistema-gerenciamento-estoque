@@ -1,6 +1,7 @@
 package com.sge.controller;
 
 import com.sge.entity.Pessoa;
+import com.sge.exceptions.InfoException;
 import com.sge.service.pessoa.PessoaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,23 +17,23 @@ public class PessoaController {
     @Autowired
     private PessoaService pessoaService;
 
-    @GetMapping("/")
+    @GetMapping("")
     public List<Pessoa> buscarTodos() {
         return pessoaService.buscarTodos();
     }
 
-    @PostMapping("/")
-    public Pessoa inserir(@RequestBody Pessoa objeto) {
+    @PostMapping("/cadastrar")
+    public Pessoa inserir(@RequestBody Pessoa objeto) throws InfoException {
         return pessoaService.inserir(objeto);
     }
 
-    @PutMapping("/")
-    public Pessoa alterar(@RequestBody Pessoa objeto) {
-        return pessoaService.alterar(objeto);
+    @PutMapping("/atualizar/{id}")
+    public Pessoa alterar(@PathVariable("id") Long id, @RequestBody Pessoa objeto) throws InfoException {
+        return pessoaService.alterar(id, objeto);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> excluir(@PathVariable("id") Long id) {
+    @DeleteMapping("/deletar/{id}")
+    public ResponseEntity<Void> excluir(@PathVariable("id") Long id) throws InfoException {
         pessoaService.excluir(id);
         return ResponseEntity.ok().build();
     }
