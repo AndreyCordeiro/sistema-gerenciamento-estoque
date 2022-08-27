@@ -1,11 +1,11 @@
 package com.sge.service.usuario;
 
-import com.sge.config.AppConfig;
 import com.sge.entity.Usuario;
 import com.sge.enums.TipoUsuario;
 import com.sge.exceptions.InfoException;
 import com.sge.repository.UsuarioRepository;
 import com.sge.util.Util;
+import com.sge.util.UtilCriptografia;
 import com.sge.util.UtilPessoa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,7 +30,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
         if (UtilPessoa.validarPessoa(usuario)) {
             usuario.setTipoUsuario(TipoUsuario.fromValue(Util.removerAcentos(tipoUsuario)));
-            usuario.setSenha(AppConfig.passwordEncoder().encode(usuario.getSenha()));
+            usuario.setSenha(UtilCriptografia.passwordEncoder().encode(usuario.getSenha()));
             return usuarioRepository.save(usuario);
         } else {
             throw new InfoException("Ocorreu um erro ao cadastrar usuário", HttpStatus.BAD_REQUEST);
@@ -53,7 +53,7 @@ public class UsuarioServiceImpl implements UsuarioService {
                     .cep(usuario.getCep() != null ? usuario.getCep() : null)
                     .email(usuario.getEmail() != null ? usuario.getEmail() : null)
                     .tipoUsuario(TipoUsuario.fromValue(Util.removerAcentos(tipoUsuario)))
-                    .senha(usuario.getSenha() != null ? AppConfig.passwordEncoder().encode(usuario.getSenha()) : null)
+                    .senha(usuario.getSenha() != null ? UtilCriptografia.passwordEncoder().encode(usuario.getSenha()) : null)
                     .build();
 
             if (UtilPessoa.validarPessoa(usuarioBuilder)) {
