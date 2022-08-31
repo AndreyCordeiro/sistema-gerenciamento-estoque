@@ -4,6 +4,7 @@ import com.sge.dto.ClienteDTO;
 import com.sge.entity.Cliente;
 import com.sge.exceptions.InfoException;
 import com.sge.service.cliente.ClienteService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,21 +22,25 @@ public class ClienteController {
     private ClienteService clienteService;
 
     @GetMapping("")
+    @Operation(summary = "Buscar Clientes", description = "Busca todos os Clientes cadastrados")
     public List<ClienteDTO> buscarTodos() {
         return clienteService.buscarTodos();
     }
 
     @PostMapping("/cadastrar")
+    @Operation(summary = "Cadastrar Cliente", description = "Cadastra um Cliente")
     public ClienteDTO inserir(@RequestBody Cliente cliente) throws InfoException {
         return clienteService.inserir(cliente);
     }
 
     @PutMapping("/atualizar/{id}")
+    @Operation(summary = "Atualizar Cliente", description = "Altera um cliente em específico")
     public ClienteDTO alterar(@PathVariable("id") Long id, @RequestBody Cliente cliente) throws InfoException {
         return clienteService.alterar(id, cliente);
     }
 
     @DeleteMapping("/deletar/{id}")
+    @Operation(summary = "Deletar Cliente", description = "Exclui um Cliente em específico")
     public ResponseEntity<Void> excluir(@PathVariable("id") Long id) throws InfoException {
         clienteService.excluir(id);
         return ResponseEntity.ok().build();
