@@ -4,6 +4,8 @@ import com.sge.dto.VendaDTO;
 import com.sge.entity.Venda;
 import com.sge.exceptions.InfoException;
 import com.sge.service.venda.VendaService;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +14,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/venda")
+@RequiredArgsConstructor
+@Tag(name = "Venda", description = "API de Venda")
 public class VendaContoller {
     @Autowired
     private VendaService vendaService;

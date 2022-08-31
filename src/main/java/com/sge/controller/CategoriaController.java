@@ -3,6 +3,7 @@ package com.sge.controller;
 import com.sge.exceptions.InfoException;
 import com.sge.entity.Categoria;
 import com.sge.service.categoria.CategoriaService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/categoria")
 @RequiredArgsConstructor
+@Tag(name = "Categoria", description = "API de Categoria")
 public class CategoriaController {
 
     private final CategoriaService categoriaService;

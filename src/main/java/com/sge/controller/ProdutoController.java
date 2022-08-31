@@ -3,6 +3,7 @@ package com.sge.controller;
 import com.sge.exceptions.InfoException;
 import com.sge.entity.Produto;
 import com.sge.service.produto.ProdutoService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/produto")
 @RequiredArgsConstructor
+@Tag(name = "Produto", description = "API de Produto")
 public class ProdutoController {
     @Autowired
     private ProdutoService produtoService;

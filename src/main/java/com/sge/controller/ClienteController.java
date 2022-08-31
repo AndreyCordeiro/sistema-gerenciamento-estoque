@@ -4,6 +4,8 @@ import com.sge.dto.ClienteDTO;
 import com.sge.entity.Cliente;
 import com.sge.exceptions.InfoException;
 import com.sge.service.cliente.ClienteService;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +14,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/cliente")
+@RequiredArgsConstructor
+@Tag(name = "Cliente", description = "API de Cliente")
 public class ClienteController {
     @Autowired
     private ClienteService clienteService;
