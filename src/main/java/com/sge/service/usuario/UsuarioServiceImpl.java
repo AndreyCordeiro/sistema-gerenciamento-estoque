@@ -82,7 +82,17 @@ public class UsuarioServiceImpl implements UsuarioService {
         if (pessoa.isPresent()) {
             usuarioRepository.delete(pessoa.get());
         } else {
-            throw new InfoException("Usuário não encontrada", HttpStatus.NOT_FOUND);
+            throw new InfoException("Usuário não encontrado", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    public Usuario encontrarUsuarioPorId(Long id) throws InfoException {
+        Optional<Usuario> pessoa = usuarioRepository.findById(id);
+
+        if (pessoa.isPresent()) {
+            return pessoa.get();
+        } else {
+            throw new InfoException("Usuário não encontrado", HttpStatus.NOT_FOUND);
         }
     }
 }
