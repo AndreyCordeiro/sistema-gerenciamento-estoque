@@ -7,6 +7,7 @@ import com.sge.entity.Venda;
 import com.sge.exceptions.InfoException;
 import com.sge.repository.VendaRepository;
 import com.sge.service.usuario.UsuarioServiceImpl;
+import com.sge.util.UtilUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -26,10 +27,11 @@ public class RelatorioServiceImpl implements RelatorioService {
     public RetornoRelatorioDTO vendasPorUsuario(Long id) throws InfoException {
         Usuario usuario = usuarioService.encontrarUsuarioPorId(id);
         if (usuario != null) {
-            List<Venda> vendaList = vendaRepository.findVendaByUsuarioId(id);
-
             RetornoRelatorioDTO retornoRelatorioDTO = new RetornoRelatorioDTO();
             List<RelatorioDTO> relatorioDTOList = new ArrayList<>();
+
+            List<Venda> vendaList = vendaRepository.findVendaByUsuarioId(id);
+
             if (!vendaList.isEmpty()) {
                 for (Venda venda : vendaList) {
                     RelatorioDTO relatorioDTO = RelatorioDTO
@@ -39,6 +41,7 @@ public class RelatorioServiceImpl implements RelatorioService {
                             .build();
                     relatorioDTOList.add(relatorioDTO);
                 }
+                retornoRelatorioDTO.setUsuarioDTO(UtilUsuario.converteUsuario(usuario));
                 retornoRelatorioDTO.setRelatorioDTO(relatorioDTOList);
                 retornoRelatorioDTO.setMensagem("O usuário " + id + " realizou o total de " + vendaList.size() + " vendas");
                 return retornoRelatorioDTO;
