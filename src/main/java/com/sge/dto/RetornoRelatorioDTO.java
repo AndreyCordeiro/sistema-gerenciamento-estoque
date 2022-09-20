@@ -15,4 +15,5 @@ public class RetornoRelatorioDTO {
     private String mensagem;
     private UsuarioDTO usuarioDTO;
     private List<RelatorioDTO> relatorioDTO;
+    private Double valorTotalVenda;
 }

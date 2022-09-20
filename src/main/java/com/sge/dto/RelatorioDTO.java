@@ -10,6 +10,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class RelatorioDTO {
-    private Long usuarioId;
+    private String nomeProduto;
+    private Double quantidade;
+    private Double valorUnitario;
+    private Long produtoId;
     private Long vendaId;
 }
