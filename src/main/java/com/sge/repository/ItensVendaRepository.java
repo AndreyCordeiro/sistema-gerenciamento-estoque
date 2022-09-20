@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ItensVendaRepository extends JpaRepository<ItensVenda, Long> {
     List<ItensVenda> findItensVendasByVendaId(Long id);
+
 }

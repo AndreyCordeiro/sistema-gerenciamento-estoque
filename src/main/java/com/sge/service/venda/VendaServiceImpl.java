@@ -5,6 +5,7 @@ import com.sge.entity.ItensVenda;
 import com.sge.entity.Produto;
 import com.sge.entity.Venda;
 import com.sge.exceptions.InfoException;
+import com.sge.repository.ItensVendaRepository;
 import com.sge.repository.ProdutoRepository;
 import com.sge.repository.VendaRepository;
 import com.sge.service.itensVenda.ItensVendaServiceImpl;
@@ -27,6 +28,8 @@ public class VendaServiceImpl extends ItensVendaServiceImpl implements VendaServ
 
     private final ProdutoRepository produtoRepository;
 
+    private final ItensVendaRepository itensVendaRepository;
+
     @Override
     public List<VendaDTO> buscarTodos() {
         List<Venda> listaVendas = vendaRepository.findAll();
@@ -34,12 +37,17 @@ public class VendaServiceImpl extends ItensVendaServiceImpl implements VendaServ
         List<VendaDTO> vendaDTOList = new ArrayList<>();
         if (listaVendas.size() > 0) {
             for (Venda venda : listaVendas) {
+                List<ItensVenda> itensVendaList = itensVendaRepository.findItensVendasByVendaId(venda.getId());
+
+                if (itensVendaList != null && itensVendaList.size() > 0) {
+                    List<ItensVenda> listaItens = new ArrayList<>(itensVendaList);
+                    venda.setItensVenda(listaItens);
+                }
                 vendaDTOList.add(UtilVenda.converteVenda(venda));
             }
         }
         return vendaDTOList;
     }
-
     @Override
     public VendaDTO inserir(Venda venda) throws InfoException {
         if (UtilVenda.validarVenda(venda)) {
