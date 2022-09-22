@@ -15,7 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,36 +44,14 @@ public class RelatorioServiceImpl implements RelatorioService {
         Usuario usuario = usuarioService.encontrarUsuarioPorId(id);
         if (usuario != null) {
             RetornoRelatorioDTO retornoRelatorioDTO = new RetornoRelatorioDTO();
-            List<RelatorioDTO> relatorioDTOList = new ArrayList<>();
-            Double valorTotal = 0.0;
 
             List<Venda> vendaList = vendaRepository.findVendaByUsuarioId(id);
             if (!vendaList.isEmpty()) {
-                for (Venda venda : vendaList) {
-                    List<ItensVenda> itensVenda = itensVendaRepository.findItensVendasByVendaId(venda.getId());
+                List<RelatorioDTO> listaRetorno = montarRetorno(vendaList);
 
-                    if (itensVenda != null && itensVenda.size() > 0) {
-                        for (ItensVenda item : itensVenda) {
-                            Optional<Produto> produto = produtoRepository.findById(item.getProduto().getId());
-
-                            if (produto.isPresent()) {
-                                RelatorioDTO relatorioDTO = RelatorioDTO
-                                        .builder()
-                                        .nomeProduto(produto.get().getNome())
-                                        .produtoId(produto.get().getId())
-                                        .quantidade(item.getQuantidade())
-                                        .valorUnitario(item.getValorUnitario())
-                                        .vendaId(venda.getId())
-                                        .build();
-                                valorTotal += item.getValorUnitario() * item.getQuantidade();
-                                relatorioDTOList.add(relatorioDTO);
-                            }
-                        }
-                    }
-                }
-                retornoRelatorioDTO.setValorTotalVenda(valorTotal);
+                retornoRelatorioDTO.setValorTotalVenda(recuperarValorTotal(listaRetorno));
                 retornoRelatorioDTO.setUsuarioDTO(UtilUsuario.converteUsuario(usuario));
-                retornoRelatorioDTO.setRelatorioDTO(relatorioDTOList);
+                retornoRelatorioDTO.setRelatorioDTO(listaRetorno);
                 retornoRelatorioDTO.setMensagem("O usuário " + id + " realizou o total de " + vendaList.size() + " venda(s)");
                 return retornoRelatorioDTO;
             } else {
@@ -78,6 +59,61 @@ public class RelatorioServiceImpl implements RelatorioService {
             }
         }
         return null;
+    }
+
+    @Override
+    public RetornoRelatorioDTO vendasFiltroPorData(String dataInicio, String dataFim) throws InfoException, ParseException {
+        Date dataInicial = new SimpleDateFormat("yyyy-MM-dd").parse(dataInicio);
+        Date dataFinal = new SimpleDateFormat("yyyy-MM-dd").parse(dataFim);
+        RetornoRelatorioDTO retornoRelatorioDTO = new RetornoRelatorioDTO();
+
+        List<Venda> vendaList = vendaRepository.findByDataVendaBetween(dataInicial, dataFinal);
+        if (!vendaList.isEmpty()) {
+            List<RelatorioDTO> listaRetorno = montarRetorno(vendaList);
+
+            retornoRelatorioDTO.setValorTotalVenda(recuperarValorTotal(listaRetorno));
+            retornoRelatorioDTO.setRelatorioDTO(listaRetorno);
+            retornoRelatorioDTO.setMensagem(vendaList.size() + " venda(s) retornada(s)");
+            return retornoRelatorioDTO;
+        } else {
+            throw new InfoException("Ocorreu um erro ao buscar a(s) venda(s) por filtro", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    protected double recuperarValorTotal(List<RelatorioDTO> lista) {
+        double valorTotal = 0.0;
+
+        for (RelatorioDTO relatorioDTO : lista) {
+            valorTotal += relatorioDTO.getValorUnitario() * relatorioDTO.getQuantidade();
+        }
+        return valorTotal;
+    }
+
+    protected List<RelatorioDTO> montarRetorno(List<Venda> vendaList) {
+        List<RelatorioDTO> relatorioDTOList = new ArrayList<>();
+
+        for (Venda venda : vendaList) {
+            List<ItensVenda> itensVenda = itensVendaRepository.findItensVendasByVendaId(venda.getId());
+
+            if (itensVenda != null && itensVenda.size() > 0) {
+                for (ItensVenda item : itensVenda) {
+                    Optional<Produto> produto = produtoRepository.findById(item.getProduto().getId());
+
+                    if (produto.isPresent()) {
+                        RelatorioDTO relatorioDTO = RelatorioDTO
+                                .builder()
+                                .nomeProduto(produto.get().getNome())
+                                .produtoId(produto.get().getId())
+                                .quantidade(item.getQuantidade())
+                                .valorUnitario(item.getValorUnitario())
+                                .vendaId(venda.getId())
+                                .build();
+                        relatorioDTOList.add(relatorioDTO);
+                    }
+                }
+            }
+        }
+        return relatorioDTOList;
     }
 
     @Override
