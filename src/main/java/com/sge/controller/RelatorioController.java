@@ -7,10 +7,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.text.ParseException;
 
 @RestController
 @RequestMapping("/api/relatorio")
@@ -22,7 +21,14 @@ public class RelatorioController {
 
     @GetMapping("/usuario/{id}")
     @Operation(summary = "Listar Vendas", description = "Lista as vendas realizadas por um usuário")
-    public RetornoRelatorioDTO alterar(@PathVariable("id") Long id) throws InfoException {
+    public RetornoRelatorioDTO gerarRelatorio(@PathVariable("id") Long id) throws InfoException {
         return relatorioService.vendasPorUsuario(id);
+    }
+
+    @GetMapping
+    @Operation(summary = "Listar Vendas por data de início e data fim", description = "Lista as vendas realizadas em um intervalo de tempo")
+    public RetornoRelatorioDTO listarVendasFiltroPorData(@RequestParam("dataInicio") String dataInicio,
+                                                         @RequestParam("dataFim") String dataFim) throws InfoException, ParseException {
+        return relatorioService.vendasFiltroPorData(dataInicio, dataFim);
     }
 }
