@@ -22,7 +22,13 @@ public class RelatorioController {
 
     @GetMapping("/usuario/{id}")
     @Operation(summary = "Listar Vendas", description = "Lista as vendas realizadas por um usuário")
-    public RetornoRelatorioDTO alterar(@PathVariable("id") Long id) throws InfoException {
+    public RetornoRelatorioDTO gerarRelatorioFuncionario(@PathVariable("id") Long id) throws InfoException {
         return relatorioService.vendasPorUsuario(id);
+    }
+
+    @GetMapping("/cliente/{id}")
+    @Operation(summary = "Listar Compras", description = "Lista as compras realizadas por um cliente")
+    public RetornoRelatorioDTO gerarRelatorioCliente(@PathVariable("id") Long id) throws InfoException {
+        return relatorioService.comprasPorCliente(id);
     }
 }

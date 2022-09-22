@@ -75,4 +75,14 @@ public class ClienteServiceImpl implements ClienteService {
             throw new InfoException("Cliente não encontrado", HttpStatus.NOT_FOUND);
         }
     }
+
+    public Cliente encontrarClientePorId(Long id) throws InfoException {
+        Optional<Cliente> pessoa = clienteRepository.findById(id);
+
+        if (pessoa.isPresent()) {
+            return pessoa.get();
+        } else {
+            throw new InfoException("Cliente não encontrado", HttpStatus.NOT_FOUND);
+        }
+    }
 }

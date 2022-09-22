@@ -5,4 +5,6 @@ import com.sge.exceptions.InfoException;
 
 public interface RelatorioService {
     RetornoRelatorioDTO vendasPorUsuario(Long id) throws InfoException;
+
+    RetornoRelatorioDTO comprasPorCliente(Long id) throws InfoException;
 }
