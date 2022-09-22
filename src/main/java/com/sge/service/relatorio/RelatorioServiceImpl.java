@@ -121,36 +121,14 @@ public class RelatorioServiceImpl implements RelatorioService {
         Cliente cliente = clienteService.encontrarClientePorId(id);
         if (cliente != null){
             RetornoRelatorioDTO retornoRelatorioDTO = new RetornoRelatorioDTO();
-            List<RelatorioDTO> relatorioDTOList = new ArrayList<>();
-            Double valorTotal = 0.0;
 
             List<Venda> vendaList = vendaRepository.findVendaByClienteId(id);
             if (!vendaList.isEmpty()) {
-                for (Venda venda : vendaList) {
-                    List<ItensVenda> itensVendas = itensVendaRepository.findItensVendasByVendaId(venda.getId());
+                List<RelatorioDTO> listaRetorno = montarRetorno(vendaList);
 
-                    if(itensVendas != null && itensVendas.size() > 0){
-                        for (ItensVenda item : itensVendas){
-                            Optional<Produto> produto = produtoRepository.findById(item.getProduto().getId());
-
-                            if (produto.isPresent()){
-                                RelatorioDTO relatorioDTO = RelatorioDTO
-                                        .builder()
-                                        .nomeProduto(produto.get().getNome())
-                                        .produtoId(produto.get().getId())
-                                        .quantidade(item.getQuantidade())
-                                        .valorUnitario(item.getValorUnitario())
-                                        .vendaId(venda.getId())
-                                        .build();
-                                valorTotal += item.getValorUnitario() * item.getQuantidade();
-                                relatorioDTOList.add(relatorioDTO);
-                            }
-                        }
-                    }
-                }
-                retornoRelatorioDTO.setValorTotalVenda(valorTotal);
+                retornoRelatorioDTO.setValorTotalVenda(recuperarValorTotal(listaRetorno));
                 retornoRelatorioDTO.setClienteDTO(UtilCliente.converteCliente(cliente));
-                retornoRelatorioDTO.setRelatorioDTO(relatorioDTOList);
+                retornoRelatorioDTO.setRelatorioDTO(listaRetorno);
                 retornoRelatorioDTO.setMensagem("O cliente " + id + " realizou um total de " + vendaList.size() + " compra(s)");
                 return retornoRelatorioDTO;
             }else {
