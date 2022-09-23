@@ -13,20 +13,22 @@ public class RelatorioServiceImplTest extends RelatorioServiceImpl {
     @Test
     public void recuperarValorTotal() {
         List<RelatorioDTO> lista = new ArrayList<>();
-        RelatorioDTO relatorioDTO1 = new RelatorioDTO();
-        RelatorioDTO relatorioDTO2 = new RelatorioDTO();
-        RelatorioDTO relatorioDTO3 = new RelatorioDTO();
 
+        RelatorioDTO relatorioDTO1 = new RelatorioDTO();
         relatorioDTO1.setValorUnitario(102.0);
         relatorioDTO1.setQuantidade(2.0);
         lista.add(relatorioDTO1);
+
+        RelatorioDTO relatorioDTO2 = new RelatorioDTO();
         relatorioDTO2.setValorUnitario(99.99);
         relatorioDTO2.setQuantidade(26.0);
         lista.add(relatorioDTO2);
+
+        RelatorioDTO relatorioDTO3 = new RelatorioDTO();
         relatorioDTO3.setValorUnitario(250.0);
         relatorioDTO3.setQuantidade(8.0);
-        lista.add(relatorioDTO3);
 
+        lista.add(relatorioDTO3);
         Assertions.assertEquals(4803.74, recuperarValorTotal(lista));
     }
 }
