@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,12 +62,11 @@ public class RelatorioServiceImpl implements RelatorioService {
 
     @Override
     public RetornoRelatorioDTO vendasFiltroPorData(String dataInicio, String dataFim) throws InfoException, ParseException {
-        Date dataInicial = new SimpleDateFormat("yyyy-MM-dd").parse(dataInicio);
-        Date dataFinal = new SimpleDateFormat("yyyy-MM-dd").parse(dataFim);
-        RetornoRelatorioDTO retornoRelatorioDTO = new RetornoRelatorioDTO();
+        List<Venda> vendaList = vendaRepository.findByDataVendaBetween(new SimpleDateFormat("yyyy-MM-dd").parse(dataInicio),
+                new SimpleDateFormat("yyyy-MM-dd").parse(dataFim));
 
-        List<Venda> vendaList = vendaRepository.findByDataVendaBetween(dataInicial, dataFinal);
         if (!vendaList.isEmpty()) {
+            RetornoRelatorioDTO retornoRelatorioDTO = new RetornoRelatorioDTO();
             List<RelatorioDTO> listaRetorno = montarRetorno(vendaList);
 
             retornoRelatorioDTO.setValorTotalVenda(recuperarValorTotal(listaRetorno));
@@ -80,7 +78,7 @@ public class RelatorioServiceImpl implements RelatorioService {
         }
     }
 
-    protected double recuperarValorTotal(List<RelatorioDTO> lista) {
+    public double recuperarValorTotal(List<RelatorioDTO> lista) {
         double valorTotal = 0.0;
 
         for (RelatorioDTO relatorioDTO : lista) {
@@ -89,7 +87,7 @@ public class RelatorioServiceImpl implements RelatorioService {
         return valorTotal;
     }
 
-    protected List<RelatorioDTO> montarRetorno(List<Venda> vendaList) {
+    public List<RelatorioDTO> montarRetorno(List<Venda> vendaList) {
         List<RelatorioDTO> relatorioDTOList = new ArrayList<>();
 
         for (Venda venda : vendaList) {
@@ -119,7 +117,7 @@ public class RelatorioServiceImpl implements RelatorioService {
     @Override
     public RetornoRelatorioDTO comprasPorCliente(Long id) throws InfoException {
         Cliente cliente = clienteService.encontrarClientePorId(id);
-        if (cliente != null){
+        if (cliente != null) {
             RetornoRelatorioDTO retornoRelatorioDTO = new RetornoRelatorioDTO();
 
             List<Venda> vendaList = vendaRepository.findVendaByClienteId(id);
@@ -131,7 +129,7 @@ public class RelatorioServiceImpl implements RelatorioService {
                 retornoRelatorioDTO.setRelatorioDTO(listaRetorno);
                 retornoRelatorioDTO.setMensagem("O cliente " + id + " realizou um total de " + vendaList.size() + " compra(s)");
                 return retornoRelatorioDTO;
-            }else {
+            } else {
                 throw new InfoException("Ocorreu um erro ao buscar a(s) compra(s) do cliente " + id, HttpStatus.BAD_REQUEST);
             }
         }
