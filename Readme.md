@@ -4,7 +4,7 @@
 
 ## Sobre
 
-Loja Virtual com Rest API que está sendo desenvolvida como parte da matéria de **Projeto Integrador II** do curso Engenharia de Software no Instituto Federal do Paraná - IFPR (Campus Paranavaí)
+Sistema para controle de estoque que está sendo desenvolvido como parte da matéria de **Projeto Integrador II** do curso Engenharia de Software no Instituto Federal do Paraná - IFPR (Campus Paranavaí)
 
 - [Campus Paranavaí - IFPR](https://paranavai.ifpr.edu.br)
 
