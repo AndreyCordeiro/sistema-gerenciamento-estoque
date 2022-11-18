@@ -20,24 +20,28 @@ public class CategoriaController {
     private final CategoriaService categoriaService;
 
     @GetMapping("")
+    @CrossOrigin("http://localhost:3000")
     @Operation(summary = "Buscar Categorias", description = "Busca todas as Categorias cadastradas")
     public List<Categoria> buscarTodos() {
         return categoriaService.buscarTodos();
     }
 
     @PostMapping("/cadastrar")
+    @CrossOrigin("http://localhost:3000")
     @Operation(summary = "Cadastrar Categoria", description = "Cadastra uma Categoria")
     public Categoria inserir(@RequestBody Categoria categoria) throws InfoException {
         return categoriaService.inserir(categoria);
     }
 
     @PutMapping("/atualizar/{id}")
+    @CrossOrigin("http://localhost:3000")
     @Operation(summary = "Alterar Categoria", description = "Altera uma Categoria em específico")
     public Categoria alterar(@PathVariable("id") Long id, @RequestBody Categoria categoria) throws InfoException {
         return categoriaService.alterar(id, categoria);
     }
 
     @DeleteMapping("/deletar/{id}")
+    @CrossOrigin("http://localhost:3000")
     @Operation(summary = "Deletar Categoria", description = "Exclui uma Categoria em específico")
     public ResponseEntity<Void> excluir(@PathVariable("id") Long id) throws InfoException {
         categoriaService.excluir(id);
