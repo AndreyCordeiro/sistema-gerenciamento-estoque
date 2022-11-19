@@ -20,18 +20,21 @@ public class RelatorioController {
     private RelatorioService relatorioService;
 
     @GetMapping("/usuario/{id}")
+    @CrossOrigin("http://localhost:3000")
     @Operation(summary = "Listar Vendas", description = "Lista as vendas realizadas por um usuário")
     public RetornoRelatorioDTO gerarRelatorioFuncionario(@PathVariable("id") Long id) throws InfoException {
         return relatorioService.vendasPorUsuario(id);
     }
 
     @GetMapping("/cliente/{id}")
+    @CrossOrigin("http://localhost:3000")
     @Operation(summary = "Listar Compras", description = "Lista as compras realizadas por um cliente")
     public RetornoRelatorioDTO gerarRelatorioCliente(@PathVariable("id") Long id) throws InfoException {
         return relatorioService.comprasPorCliente(id);
     }
 
     @GetMapping
+    @CrossOrigin("http://localhost:3000")
     @Operation(summary = "Listar Vendas por data de início e data fim", description = "Lista as vendas realizadas em um intervalo de tempo")
     public RetornoRelatorioDTO listarVendasFiltroPorData(@RequestParam("dataInicio") String dataInicio,
                                                          @RequestParam("dataFim") String dataFim) throws InfoException, ParseException {

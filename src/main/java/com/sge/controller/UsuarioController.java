@@ -22,24 +22,28 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @GetMapping("")
+    @CrossOrigin("http://localhost:3000")
     @Operation(summary = "Buscar Usuários", description = "Busca todas os Usuários cadastrados")
     public List<UsuarioDTO> buscarTodos() {
         return usuarioService.buscarTodos();
     }
 
     @PostMapping("/cadastrar")
+    @CrossOrigin("http://localhost:3000")
     @Operation(summary = "Cadastrar Usuário", description = "Cadastra um Usuário")
     public UsuarioDTO inserir(@RequestBody Usuario usuario, @RequestParam String tipoUsuario) throws InfoException {
         return usuarioService.inserir(usuario, tipoUsuario);
     }
 
     @PutMapping("/atualizar/{id}")
+    @CrossOrigin("http://localhost:3000")
     @Operation(summary = "Alterar Usuário", description = "Altera um Usuário em específico")
     public UsuarioDTO alterar(@PathVariable("id") Long id, @RequestBody Usuario usuario, @RequestParam String tipoUsuario) throws InfoException {
         return usuarioService.alterar(id, usuario, tipoUsuario);
     }
 
     @DeleteMapping("/deletar/{id}")
+    @CrossOrigin("http://localhost:3000")
     @Operation(summary = "Deletar Usuário", description = "Exclui um Usuário em específico")
     public ResponseEntity<Void> excluir(@PathVariable("id") Long id) throws InfoException {
         usuarioService.excluir(id);
