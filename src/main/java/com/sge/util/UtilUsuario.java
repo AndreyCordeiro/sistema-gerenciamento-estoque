@@ -33,7 +33,6 @@ public class UtilUsuario {
                 .nome(usuario.getNome())
                 .documento(usuario.getDocumento())
                 .endereco(usuario.getEndereco())
-                .tipoUsuario(usuario.getTipoUsuario() != null ? usuario.getTipoUsuario().toString() : null)
                 .cep(usuario.getCep())
                 .email(usuario.getEmail())
                 .build();

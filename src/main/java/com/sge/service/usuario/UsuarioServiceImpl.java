@@ -39,7 +39,6 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
 
         if (UtilUsuario.validarUsuario(usuario)) {
-            usuario.setTipoUsuario(TipoUsuario.fromValue(Util.removerAcentos(tipoUsuario)));
             usuario.setSenha(UtilCriptografia.passwordEncoder().encode(usuario.getSenha()));
             usuarioRepository.save(usuario);
             return UtilUsuario.converteUsuario(usuario);
@@ -63,7 +62,6 @@ public class UsuarioServiceImpl implements UsuarioService {
                     .endereco(usuario.getEndereco() != null ? usuario.getEndereco() : null)
                     .cep(usuario.getCep() != null ? usuario.getCep() : null)
                     .email(usuario.getEmail() != null ? usuario.getEmail() : null)
-                    .tipoUsuario(TipoUsuario.fromValue(Util.removerAcentos(tipoUsuario)))
                     .senha(usuario.getSenha() != null ? UtilCriptografia.passwordEncoder().encode(usuario.getSenha()) : null)
                     .build();
 

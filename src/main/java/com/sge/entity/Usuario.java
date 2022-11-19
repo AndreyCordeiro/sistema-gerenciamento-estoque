@@ -1,9 +1,9 @@
 package com.sge.entity;
 
-import com.sge.enums.TipoUsuario;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "usuario")
@@ -29,9 +29,9 @@ public class Usuario extends Auditavel {
     @Column(name = "cep")
     private String cep;
 
-    @Column(name = "tipo_usuario")
-    @Enumerated(EnumType.STRING)
-    private TipoUsuario tipoUsuario;
+    @OneToMany(mappedBy = "usuario", orphanRemoval = true, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @Setter(value = AccessLevel.NONE)
+    private List<PermissaoUsuario> permissaoUsuarios;
 
     @Column(name = "email")
     private String email;
