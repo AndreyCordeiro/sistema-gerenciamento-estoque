@@ -9,9 +9,9 @@ import java.util.List;
 public interface UsuarioService {
     List<UsuarioDTO> buscarTodos();
 
-    UsuarioDTO inserir(Usuario usuario, String tipoUsuario) throws InfoException;
+    UsuarioDTO inserir(Usuario usuario) throws InfoException;
 
-    UsuarioDTO alterar(Long id, Usuario usuario, String tipoUsuario) throws InfoException;
+    Usuario alterar(Long id, Usuario usuario) throws InfoException;
 
     void excluir(Long id) throws InfoException;
 }

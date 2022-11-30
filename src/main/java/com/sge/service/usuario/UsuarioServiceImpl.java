@@ -1,12 +1,11 @@
 package com.sge.service.usuario;
 
 import com.sge.dto.UsuarioDTO;
+import com.sge.entity.PermissaoUsuario;
 import com.sge.entity.Usuario;
-import com.sge.enums.TipoUsuario;
 import com.sge.exceptions.InfoException;
+import com.sge.repository.PermissaoUsuarioRepository;
 import com.sge.repository.UsuarioRepository;
-import com.sge.util.Util;
-import com.sge.util.UtilCriptografia;
 import com.sge.util.UtilUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +20,9 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private PermissaoUsuarioRepository permissaoUsuarioRepository;
+
     public List<UsuarioDTO> buscarTodos() {
         List<Usuario> listaUsuarios = usuarioRepository.findAll();
 
@@ -33,25 +35,23 @@ public class UsuarioServiceImpl implements UsuarioService {
         return usuarioDTOList;
     }
 
-    public UsuarioDTO inserir(Usuario usuario, String tipoUsuario) throws InfoException {
-        if (tipoUsuario == null || tipoUsuario.equals("")) {
-            throw new InfoException("MESSAGE.TIPO_USUARIO_REQUIRED", HttpStatus.BAD_REQUEST);
-        }
-
+    public UsuarioDTO inserir(Usuario usuario) throws InfoException {
         if (UtilUsuario.validarUsuario(usuario)) {
-            usuario.setSenha(UtilCriptografia.passwordEncoder().encode(usuario.getSenha()));
+            PermissaoUsuario permissaoUsuario = new PermissaoUsuario();
+
+            permissaoUsuario.setUsuario(usuario);
+            permissaoUsuario.setPermissao(usuario.getPermissaoUsuarios().get(0).getPermissao());
+
             usuarioRepository.save(usuario);
+            permissaoUsuarioRepository.save(permissaoUsuario);
+
             return UtilUsuario.converteUsuario(usuario);
         } else {
             throw new InfoException("Ocorreu um erro ao cadastrar usuário", HttpStatus.BAD_REQUEST);
         }
     }
 
-    public UsuarioDTO alterar(Long id, Usuario usuario, String tipoUsuario) throws InfoException {
-        if (tipoUsuario == null || tipoUsuario.equals("")) {
-            throw new InfoException("MESSAGE.TIPO_USUARIO_REQUIRED", HttpStatus.BAD_REQUEST);
-        }
-
+    public Usuario alterar(Long id, Usuario usuario) throws InfoException {
         Optional<Usuario> optionalPessoa = usuarioRepository.findById(id);
 
         if (optionalPessoa.isPresent()) {
@@ -62,13 +62,13 @@ public class UsuarioServiceImpl implements UsuarioService {
                     .endereco(usuario.getEndereco() != null ? usuario.getEndereco() : null)
                     .cep(usuario.getCep() != null ? usuario.getCep() : null)
                     .email(usuario.getEmail() != null ? usuario.getEmail() : null)
-                    .senha(usuario.getSenha() != null ? UtilCriptografia.passwordEncoder().encode(usuario.getSenha()) : null)
+                    .permissaoUsuarios(usuario.getPermissaoUsuarios() != null && usuario.getPermissaoUsuarios().size() > 0 ? usuario.getPermissaoUsuarios() : null)
                     .build();
 
             if (UtilUsuario.validarUsuario(usuarioBuilder)) {
                 usuarioRepository.save(usuarioBuilder);
             }
-            return UtilUsuario.converteUsuario(usuarioBuilder);
+            return usuarioBuilder;
         } else {
             throw new InfoException("Usuário não encontrado", HttpStatus.NOT_FOUND);
         }

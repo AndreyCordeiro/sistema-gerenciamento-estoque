@@ -29,7 +29,7 @@ public class Usuario extends Auditavel {
     @Column(name = "cep")
     private String cep;
 
-    @OneToMany(mappedBy = "usuario", orphanRemoval = true, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(mappedBy = "usuario", orphanRemoval = true, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @Setter(value = AccessLevel.NONE)
     private List<PermissaoUsuario> permissaoUsuarios;
 

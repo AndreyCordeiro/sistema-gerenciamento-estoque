@@ -22,19 +22,18 @@ public class UtilUsuario {
         if (usuario.getEmail() == null || usuario.getEmail().equals("")) {
             throw new InfoException("MESSAGE.EMAIL_REQUIRED", HttpStatus.BAD_REQUEST);
         }
-        if (usuario.getSenha() == null || usuario.getSenha().equals("")) {
-            throw new InfoException("MESSAGE.SENHA_REQUIRED", HttpStatus.BAD_REQUEST);
-        }
         return true;
     }
 
     public static UsuarioDTO converteUsuario(Usuario usuario) {
         return UsuarioDTO.builder()
+                .id(usuario.getId())
                 .nome(usuario.getNome())
                 .documento(usuario.getDocumento())
                 .endereco(usuario.getEndereco())
                 .cep(usuario.getCep())
                 .email(usuario.getEmail())
+                .permissaoUsuarios(usuario.getPermissaoUsuarios())
                 .build();
     }
 }
