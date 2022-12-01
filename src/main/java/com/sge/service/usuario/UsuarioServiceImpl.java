@@ -37,13 +37,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     public UsuarioDTO inserir(Usuario usuario) throws InfoException {
         if (UtilUsuario.validarUsuario(usuario)) {
-            PermissaoUsuario permissaoUsuario = new PermissaoUsuario();
-
-            permissaoUsuario.setUsuario(usuario);
-            permissaoUsuario.setPermissao(usuario.getPermissaoUsuarios().get(0).getPermissao());
+            usuario.getPermissaoUsuarios().get(0).setUsuario(usuario);
 
             usuarioRepository.save(usuario);
-            permissaoUsuarioRepository.save(permissaoUsuario);
 
             return UtilUsuario.converteUsuario(usuario);
         } else {
@@ -66,6 +62,7 @@ public class UsuarioServiceImpl implements UsuarioService {
                     .build();
 
             if (UtilUsuario.validarUsuario(usuarioBuilder)) {
+                usuarioBuilder.getPermissaoUsuarios().get(0).setUsuario(usuarioBuilder);
                 usuarioRepository.save(usuarioBuilder);
             }
             return usuarioBuilder;
@@ -75,10 +72,13 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     public void excluir(Long id) throws InfoException {
-        Optional<Usuario> pessoa = usuarioRepository.findById(id);
+        Optional<Usuario> usuario = usuarioRepository.findById(id);
 
-        if (pessoa.isPresent()) {
-            usuarioRepository.delete(pessoa.get());
+        if (usuario.isPresent()) {
+            List<PermissaoUsuario> permissoesUsuario = permissaoUsuarioRepository.findByUsuarioId(usuario.get().getId());
+
+            usuarioRepository.delete(usuario.get());
+            permissaoUsuarioRepository.deleteAll(permissoesUsuario);
         } else {
             throw new InfoException("Usuário não encontrado", HttpStatus.NOT_FOUND);
         }
