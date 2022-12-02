@@ -21,6 +21,7 @@ public class UtilVenda {
 
     public static VendaDTO converteVenda(Venda venda) {
         return VendaDTO.builder()
+                .id(venda.getId())
                 .itensVenda(UtilItensVenda.converterListaItensVenda(venda.getItensVenda()))
                 .build();
     }

@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class ClienteDTO {
+    private Long id;
     private String nome;
     private String documento;
     private String endereco;

@@ -34,7 +34,6 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public ClienteDTO inserir(Cliente cliente) throws InfoException {
         if (UtilCliente.validarCliente(cliente)) {
-            cliente.setSenha(UtilCriptografia.passwordEncoder().encode(cliente.getSenha()));
             clienteRepository.save(cliente);
             return UtilCliente.converteCliente(cliente);
         } else {

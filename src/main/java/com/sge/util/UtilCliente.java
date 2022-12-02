@@ -22,14 +22,12 @@ public class UtilCliente {
         if (cliente.getEmail() == null || cliente.getEmail().equals("")) {
             throw new InfoException("MESSAGE.EMAIL_REQUIRED", HttpStatus.BAD_REQUEST);
         }
-        if (cliente.getSenha() == null || cliente.getSenha().equals("")) {
-            throw new InfoException("MESSAGE.SENHA_REQUIRED", HttpStatus.BAD_REQUEST);
-        }
         return true;
     }
 
     public static ClienteDTO converteCliente(Cliente cliente) {
         return ClienteDTO.builder()
+                .id(cliente.getId())
                 .nome(cliente.getNome())
                 .documento(cliente.getDocumento())
                 .endereco(cliente.getEndereco())

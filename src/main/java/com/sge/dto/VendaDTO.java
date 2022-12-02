@@ -12,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class VendaDTO {
+    private Long id;
     private UsuarioDTO usuario;
     private ClienteDTO cliente;
     private List<ItensVendaDTO> itensVenda;
