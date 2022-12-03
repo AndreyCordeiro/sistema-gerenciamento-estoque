@@ -1,8 +1,12 @@
 package com.sge.entity;
 
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -11,7 +15,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class Usuario extends Auditavel {
+public class Usuario extends Auditavel implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -38,4 +42,46 @@ public class Usuario extends Auditavel {
 
     @Column(name = "senha")
     private String senha;
+
+    @Column(name = "codigo_recuperacao_senha")
+    private String codigoRecuperacaoSenha;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "data_envio_codigo")
+    private Date dataEnvioCodigo;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return permissaoUsuarios;
+    }
+
+    @Override
+    public String getPassword() {
+        return senha;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

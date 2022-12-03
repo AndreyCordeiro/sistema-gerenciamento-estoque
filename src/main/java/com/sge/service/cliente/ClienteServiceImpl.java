@@ -5,7 +5,6 @@ import com.sge.entity.Cliente;
 import com.sge.exceptions.InfoException;
 import com.sge.repository.ClienteRepository;
 import com.sge.util.UtilCliente;
-import com.sge.util.UtilCriptografia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -53,7 +52,6 @@ public class ClienteServiceImpl implements ClienteService {
                     .endereco(cliente.getEndereco() != null ? cliente.getEndereco() : null)
                     .cep(cliente.getCep() != null ? cliente.getCep() : null)
                     .email(cliente.getEmail() != null ? cliente.getEmail() : null)
-                    .senha(cliente.getSenha() != null ? UtilCriptografia.passwordEncoder().encode(cliente.getSenha()) : null)
                     .build();
 
             if (UtilCliente.validarCliente(clienteBuilder)) {
